@@ -1,0 +1,307 @@
+footer.site-footer {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #111111;
+  overflow: hidden;
+  border-top: 3px solid #980000;
+  background-color: rgba(245, 242, 240, 0.98);
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='88' viewBox='0 0 80 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22 21.91V26h-2c-9.94 0-18 8.06-18 18 0 9.943 8.058 18 18 18h2v4.09c8.012.722 14.785 5.738 18 12.73 3.212-6.99 9.983-12.008 18-12.73V62h2c9.94 0 18-8.06 18-18 0-9.943-8.058-18-18-18h-2v-4.09c-8.012-.722-14.785-5.738-18-12.73-3.212 6.99-9.983 12.008-18 12.73zM54 58v4.696c-5.574 1.316-10.455 4.428-14 8.69-3.545-4.262-8.426-7.374-14-8.69V58h-5.993C12.27 58 6 51.734 6 44c0-7.732 6.275-14 14.007-14H26v-4.696c5.574-1.316 10.455-4.428 14-8.69 3.545 4.262 8.426 7.374 14 8.69V30h5.993C67.73 30 74 36.266 74 44c0 7.732-6.275 14-14.007 14H54z' fill='%23500000' fill-opacity='.065' fill-rule='evenodd'/%3E%3C/svg%3E");
+
+  a {
+    color: inherit;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 58px 0 52px;
+  }
+
+  .logoFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 680px);
+    text-align: center;
+
+    > a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      display: block;
+      width: min(300px, 72vw);
+      height: auto;
+      object-fit: contain;
+    }
+
+    p {
+      max-width: 660px;
+      margin: 20px auto 0;
+      color: #111111;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+  }
+
+  .menuFooter {
+    width: 100%;
+    margin-top: 34px;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 14px 30px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      position: relative;
+      display: inline-flex;
+      padding: 4px 0;
+      color: #111111;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: #980000;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.25s ease;
+      }
+
+      &:hover::after,
+      &:focus-visible::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  .bottomRowFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
+    min-height: 145px;
+    padding: 24px max(6vw, 32px);
+    color: #ffffff;
+    background: #5a0000;
+
+    > p {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
+  .footerSelos {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    flex: 0 0 auto;
+  }
+
+  .logoYaslip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 112px;
+
+    object {
+      display: block;
+      width: 78px;
+      height: 110px;
+      pointer-events: none;
+    }
+  }
+
+  .validator-seals {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      display: block;
+      width: 42px;
+      height: 60px;
+      object-fit: contain;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding-bottom: 70px;
+
+    .top {
+      width: min(100% - 28px, 660px);
+      padding: 44px 0 40px;
+    }
+
+    .logoFooter p {
+      font-size: 15px;
+    }
+
+    .menuFooter {
+      margin-top: 28px;
+
+      ul {
+        gap: 12px 22px;
+      }
+
+      a {
+        font-size: 13px;
+      }
+    }
+
+    .bottomRowFooter {
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      min-height: 0;
+      padding: 28px 20px 32px;
+      text-align: center;
+    }
+
+    .footerSelos {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .menuFooter ul {
+      gap: 12px 18px;
+    }
+
+    .footerSelos {
+      gap: 10px;
+    }
+
+    .logoYaslip {
+      width: 84px;
+    }
+  }
+}
+
+/* Botão de WhatsApp do desktop */
+.whatsapp-btn {
+  display: block;
+  z-index: 9998;
+
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.whatsapp-animate-circulo-pulse,
+.whatsapp-btn-bg {
+  border-radius: 100%;
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  animation-iteration-count: infinite;
+}
+
+.zoomIn {
+  animation-name: zoomIn;
+}
+
+.tada {
+  animation-name: tada;
+}
+
+.whatsapp-animate-circulo-pulse {
+  position: fixed;
+  right: 15px;
+  bottom: 96px;
+  z-index: 9997;
+  width: 90px;
+  height: 90px;
+  border: 2px solid #43b91e;
+  background-color: transparent;
+  opacity: 0.18;
+}
+
+.whatsapp-btn-config {
+  position: fixed;
+  right: 40px;
+  bottom: 120px;
+  z-index: 9999;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  background: url(/selos/WhatsAppButton.webp) center / 100% no-repeat #43b91e;
+}
+
+.whatsapp-btn-bg {
+  position: fixed;
+  right: 31px;
+  bottom: 111px;
+  z-index: 9998;
+  width: 60px;
+  height: 60px;
+  border: 2px solid transparent;
+  background-color: #43b91e;
+  opacity: 0.42 !important;
+}
+
+@keyframes tada {
+  from,
+  to { transform: scale3d(1, 1, 1); }
+  10%,
+  20% { transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg); }
+  30%,
+  50%,
+  70%,
+  90% { transform: scale3d(1.1, 1.1, 1.1) rotate(3deg); }
+  40%,
+  60%,
+  80% { transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+  50% { opacity: 1; }
+}

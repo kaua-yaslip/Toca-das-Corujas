@@ -1,0 +1,41 @@
+.progress-mobile {
+  position: relative;
+  background-color: #f4bc33;
+  border: 2px solid #fff;
+  width: 60px !important;
+  height: 60px !important;
+}
+@media screen and (min-width: 320px) and (max-width: 375px) {
+  .progress-mobile {
+    width: 55px !important;
+    height: 55px !important;
+  }
+}
+.progress-mobile .progress-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.progress-mobile .progress-bg {
+  color: #fff;
+}
+.progress-mobile .progress-bar {
+  color: #000;
+  transition: stroke-dashoffset 0.15s ease-out;
+}
+.progress-mobile .progress-text {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.progress-mobile .progress-text span {
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1;
+  font-family: "Montserrat", sans-serif;
+}

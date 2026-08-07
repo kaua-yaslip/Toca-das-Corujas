@@ -1,0 +1,189 @@
+.module-formulario .contactIndex {
+  margin: 0 auto;
+  width: 100%;
+  padding: 50px 0;
+  height: auto;
+  background: linear-gradient(0deg, rgba(80, 0, 0, 0.7411764706) 0%, rgba(59, 59, 59, 0.8) 100%), url(assets/imgs-site/novas-fotos/bannerIndex.webp);
+  background-size: cover;
+  font-family: "Libre Franklin", sans-serif;
+}
+.module-formulario .contactIndex h2 {
+  font-family: "The Seasons serif";
+  font-size: 40px;
+  width: 100%;
+  padding-bottom: 20px;
+  text-align: center;
+  color: #fff;
+}
+.module-formulario .contactIndex p {
+  text-align: center;
+  color: white;
+  padding: 3vw;
+}
+.module-formulario .contactIndex .configContactIndex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 80%;
+  margin: 0 auto;
+}
+@media (max-width: 1350px) {
+  .module-formulario .contactIndex .configContactIndex {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.module-formulario .contactIndex .configContactIndex .formIndex {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 1350px) {
+  .module-formulario .contactIndex .configContactIndex .formIndex {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+  padding-top: 30px;
+}
+@media (max-width: 1350px) {
+  .module-formulario .contactIndex .configContactIndex .formIndex form {
+    justify-content: center;
+  }
+}
+@media (max-width: 640px) {
+  .module-formulario .contactIndex .configContactIndex .formIndex form {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form input,
+.module-formulario .contactIndex .configContactIndex .formIndex form select,
+.module-formulario .contactIndex .configContactIndex .formIndex form textarea {
+  border: none;
+  background-color: transparent;
+  border: 1px solid white;
+  color: rgba(255, 255, 255, 0.9);
+  width: 80%;
+  border-radius: 10px;
+  height: 50px;
+  margin: 5px 0;
+  padding: 0 10px;
+  transition: 0.5s;
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form input::-moz-placeholder, .module-formulario .contactIndex .configContactIndex .formIndex form select::-moz-placeholder, .module-formulario .contactIndex .configContactIndex .formIndex form textarea::-moz-placeholder {
+  color: #fff;
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form input::placeholder,
+.module-formulario .contactIndex .configContactIndex .formIndex form select::placeholder,
+.module-formulario .contactIndex .configContactIndex .formIndex form textarea::placeholder {
+  color: #fff;
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form input:hover,
+.module-formulario .contactIndex .configContactIndex .formIndex form select:hover,
+.module-formulario .contactIndex .configContactIndex .formIndex form textarea:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form input:hover::-moz-placeholder, .module-formulario .contactIndex .configContactIndex .formIndex form select:hover::-moz-placeholder, .module-formulario .contactIndex .configContactIndex .formIndex form textarea:hover::-moz-placeholder {
+  color: #333;
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form input:hover::placeholder,
+.module-formulario .contactIndex .configContactIndex .formIndex form select:hover::placeholder,
+.module-formulario .contactIndex .configContactIndex .formIndex form textarea:hover::placeholder {
+  color: #333;
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form textarea {
+  width: 80%;
+  resize: none;
+  height: 100px;
+  padding: 10px;
+  line-height: 25px;
+}
+@media (max-width: 640px) {
+  .module-formulario .contactIndex .configContactIndex .formIndex form textarea {
+    width: 216px;
+  }
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form select {
+  width: calc(83% - 20px);
+  padding: 0;
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form input:focus ~ label, .module-formulario .contactIndex .configContactIndex .formIndex form input:valid ~ label,
+.module-formulario .contactIndex .configContactIndex .formIndex form textarea:focus ~ label,
+.module-formulario .contactIndex .configContactIndex .formIndex form textarea:valid ~ label {
+  top: -12.5px;
+  left: 0;
+  font-size: 13px;
+}
+
+.module-formulario .contactIndex .configContactIndex .formIndex form input[type=submit] {
+  background-color: transparent;
+  width: 150px;
+  height: 40px;
+  color: white;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.module-formulario .contactIndex .configContactIndex .formIndex form input[type=submit]:hover {
+  color: #000;
+  background-color: #fff;
+  transform: scale(1.1);
+}
+
+/* ---------------------- ReCaptcha Left ------------------ */
+.g-recaptcha {
+  margin: 2% 10%;
+}
+
+.grecaptcha-badge {
+  width: 70px !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+  left: -2px !important;
+  bottom: 40px !important;
+}
+.grecaptcha-badge:hover {
+  width: 256px !important;
+}
+@media (max-width: 768px) {
+  .grecaptcha-badge {
+    bottom: 100px !important;
+  }
+}
+
+/* ---------------------- ALERTA DE ENVIO ------------------ */
+.formulario-enviado {
+  color: #4f8a10;
+  background-color: #dff2bf;
+  width: 70%;
+  font-size: 15px;
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 15px;
+}
+
+.erro-captcha {
+  color: #d8000c;
+  background-color: #ffd2d2;
+  width: 70%;
+  font-size: 15px;
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 15px;
+}

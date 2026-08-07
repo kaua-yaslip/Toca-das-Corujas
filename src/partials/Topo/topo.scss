@@ -1,0 +1,655 @@
+/* ---------------------- Topo corrigido ------------------ */
+/* O topo fica preso à janela durante toda a rolagem.
+   O espaçamento no body impede que o conteúdo fique escondido atrás dele. */
+body {
+  padding-top: 116px !important;
+}
+
+header {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  width: 100%;
+  z-index: 9999;
+  font-family: "Libre Franklin", sans-serif;
+  background: #ffffff;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.22);
+  transform: none !important;
+  animation: none !important;
+  margin: 0;
+  padding: 0;
+
+  .topo {
+    width: 100%;
+    margin: 0;
+    background-color: #ffffff;
+    background-image: linear-gradient(300deg, #f4f4f4 86%, #5c0000 50%);
+    backdrop-filter: none;
+    box-shadow: none;
+    transition: 0.3s ease;
+  }
+
+  .topo-menu {
+    width: min(1180px, calc(100% - 40px));
+    min-height: 116px;
+    margin: 0 auto;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 34px;
+
+    nav {
+      min-width: 0;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #980000;
+      position: relative;
+      font-weight: 800;
+      font-size: 14px;
+      font-family: "Libre Franklin", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      transition: color 0.25s ease;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 4px;
+        width: 100%;
+        height: 2px;
+        background-color: #980000;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.25s ease;
+      }
+
+      &:hover,
+      &.ativo {
+        color: #700000;
+
+        &::before {
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+
+  .topo-logo {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-left: clamp(30px, 7vw, 110px);
+
+    img {
+      display: block;
+      width: clamp(150px, 16vw, 220px);
+      height: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .topo-logo {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .topo-logo {
+      margin-left: 0;
+    }
+  } 
+
+  nav {
+    min-width: 0;
+  }
+
+  .menu-desktop {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: clamp(16px, 2vw, 30px);
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: clamp(16px, 2vw, 30px);
+      align-items: center;
+    }
+
+    li {
+      position: relative;
+      list-style: none;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #980000;
+      position: relative;
+      min-height: 44px;
+      font-weight: 800;
+      font-size: 14px;
+      font-family: "Libre Franklin", sans-serif;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .dropdown {
+      position: relative;
+
+      &:hover,
+      &:focus-within {
+        .dropdown-list {
+          opacity: 1;
+          visibility: visible;
+          transform: translate(-50%, 0);
+          pointer-events: auto;
+        }
+      }
+    }
+
+    .dropdown-list {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translate(-50%, 10px);
+      width: max-content;
+      min-width: 240px;
+      max-width: min(320px, calc(100vw - 32px));
+      max-height: 60vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 10px;
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: 0.2s ease;
+      z-index: 10000;
+
+      li {
+        width: 100%;
+      }
+
+      a {
+        width: 100%;
+        min-height: auto;
+        padding: 9px 10px;
+        color: #222222;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: normal;
+        line-height: 1.3;
+        border-radius: 8px;
+
+        &::before {
+          display: none;
+        }
+
+        &:hover {
+          color: #980000;
+          background: #f7eeee;
+        }
+      }
+    }
+  }
+
+  .topo-mobile {
+    display: none;
+  }
+
+  &.topo-scroll {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+
+    .topo {
+      width: 100%;
+      margin: 0;
+      background-color: rgba(255, 255, 255, 0.96);
+      background-image: linear-gradient(300deg, #f4f4f4 86%, #5c0000 50%);
+      backdrop-filter: blur(12px);
+    }
+
+    .topo-menu {
+      min-height: 116px;
+      padding: 14px 0;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  header {
+    .topo-menu {
+      width: min(1000px, calc(100% - 32px));
+      gap: 22px;
+    }
+
+    .menu-desktop {
+      gap: 18px;
+
+      a {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    padding-top: 92px !important;
+  }
+
+  header {
+    .topo {
+      display: none;
+    }
+
+    .topo-mobile {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 92px;
+      padding: 10px 18px;
+      background: #ffffff;
+      box-shadow: none;
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        list-style: none;
+      }
+    }
+
+    .topo-logo-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        display: block;
+        width: clamp(150px, 52vw, 230px);
+        height: auto;
+      }
+    }
+
+    .hamburger-lines {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 32px;
+      height: 26px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      z-index: 10002;
+
+      .line {
+        display: block;
+        width: 100%;
+        height: 4px;
+        border-radius: 10px;
+        background: #5c0000;
+        transition: 0.22s ease;
+      }
+
+      &.active {
+        .line1 {
+          transform: translateY(11px) rotate(45deg);
+        }
+
+        .line2 {
+          opacity: 0;
+        }
+
+        .line3 {
+          transform: translateY(-11px) rotate(-45deg);
+        }
+      }
+    }
+
+    .menu-mobile-overlay {
+      position: fixed;
+      inset: 92px 0 0 0;
+      display: block;
+      width: 100%;
+      border: 0;
+      background: rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: 0.25s ease;
+      z-index: 9998;
+
+      &.overlay-ativo {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
+
+    #menuMobile {
+      position: fixed;
+      top: 92px;
+      right: -100%;
+      width: min(86vw, 380px);
+      height: calc(100vh - 92px);
+      overflow-y: auto;
+      padding: 18px 18px 34px;
+      border-left: 1px solid #ead8d0;
+      background: linear-gradient(180deg, #fffaf7 0%, #ffffff 100%);
+      box-shadow: -10px 0 28px rgba(54, 15, 9, 0.22);
+      transition: right 0.28s ease;
+      z-index: 10001;
+
+      &.activeMenu {
+        right: 0;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1.3;
+      }
+
+      >ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      >ul>li {
+        width: 100%;
+        border-bottom: 1px solid #ead8d0;
+      }
+
+      >ul>li>.nav-link,
+      .dropdown-mobile-header>.nav-link {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 52px;
+        padding: 14px 12px;
+        border-radius: 10px;
+        background: transparent;
+        color: #651010 !important;
+        font-family: "Libre Franklin", sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        line-height: 1.2;
+        text-decoration: none !important;
+        text-transform: uppercase;
+        transition: color 0.2s ease, background-color 0.2s ease;
+
+        &:hover,
+        &:focus-visible,
+        &.ativo {
+          background: #f5e8e3;
+          color: #8b0000 !important;
+          outline: none;
+        }
+      }
+
+      >ul>li:last-child {
+        margin-top: 14px;
+        border-bottom: 0;
+      }
+
+      >ul>li:last-child>.nav-link {
+        justify-content: center;
+        min-height: 48px;
+        border: 1px solid #7d1111;
+        background: #7d1111;
+        color: #ffffff !important;
+        box-shadow: 0 7px 18px rgba(125, 17, 17, 0.2);
+
+        &:hover,
+        &:focus-visible,
+        &.ativo {
+          background: #590909;
+          color: #ffffff !important;
+        }
+      }
+
+      .dropdown-mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        padding: 2px 0;
+
+        .nav-link {
+          flex: 1;
+        }
+
+        button {
+          flex: 0 0 40px;
+          width: 40px;
+          height: 40px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #8b1a1a;
+          border-radius: 50%;
+          background: #ffffff;
+          color: #8b1a1a;
+          cursor: pointer;
+          transition: color 0.2s ease, background-color 0.2s ease;
+
+          &:hover,
+          &:focus-visible {
+            background: #8b1a1a;
+            color: #ffffff;
+            outline: none;
+          }
+        }
+      }
+
+      .dropdown-list-mobile {
+        display: none;
+        width: 100%;
+        max-height: 260px;
+        overflow-y: auto;
+        margin: 4px 0 14px;
+        padding: 8px;
+        border: 1px solid #ead8d0;
+        border-radius: 12px;
+        background: #f8f1ed;
+
+        ul,
+        li {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          border: 0;
+        }
+
+        &.ativo {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        a {
+          display: block;
+          width: 100%;
+          min-height: auto;
+          padding: 10px 11px;
+          border-radius: 8px;
+          color: #392521 !important;
+          font-size: 14px;
+          font-weight: 650;
+          line-height: 1.35;
+          text-decoration: none !important;
+          transition: color 0.2s ease, background-color 0.2s ease;
+
+          &:hover,
+          &:focus-visible {
+            background: #ffffff;
+            color: #8b0000 !important;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 82px !important;
+  }
+
+  header {
+    .topo-mobile {
+      min-height: 82px;
+      padding: 8px 14px;
+    }
+
+    .menu-mobile-overlay {
+      inset: 82px 0 0 0;
+    }
+
+    #menuMobile {
+      top: 82px;
+      width: 88vw;
+      height: calc(100vh - 82px);
+    }
+  }
+}
+
+
+/* ==================================================
+   Ajustes solicitados no PDF - menu e topo durante a rolagem
+================================================== */
+header {
+  .topo-scroll-chamada {
+    display: none;
+  }
+
+  .menu-desktop .dropdown {
+
+    /* Ponte invisível entre o item e o submenu: evita o fechamento
+       enquanto o cursor percorre o pequeno espaço entre ambos. */
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      right: -14px;
+      left: -14px;
+      height: 14px;
+    }
+  }
+
+  .menu-desktop .dropdown-list {
+    top: calc(100% + 1px);
+  }
+}
+
+@media (min-width: 901px) {
+  header.topo-scroll {
+    padding: 10px 0;
+    background: transparent;
+    box-shadow: none;
+    pointer-events: none;
+
+    .topo {
+      width: min(1180px, calc(100% - 64px));
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.97);
+      background-image: linear-gradient(300deg, #f4f4f4 86%, #5c0000 50%);
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(10px);
+      pointer-events: auto;
+    }
+
+    .topo-menu {
+      position: relative;
+      min-height: 72px;
+      padding: 6px 24px;
+      gap: 24px;
+    }
+
+    .topo-logo img {
+      width: 150px;
+    }
+
+    .topo-scroll-chamada {
+      position: absolute;
+      top: 50%;
+      left: 42%;
+      display: block;
+      color: rgba(90, 0, 0, 0.28);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(18px, 2vw, 28px);
+      font-weight: 700;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .menu-desktop {
+      gap: 18px;
+
+      a {
+        min-height: 38px;
+        font-size: 12px;
+      }
+    }
+
+    .dropdown-list a {
+      font-size: 13px;
+    }
+  }
+}
+
+/* Ajuste solicitado: desloca levemente a logo para a direita no topo desktop. */
+@media (min-width: 901px) {
+  header .topo-logo {
+    transform: translateX(24px);
+  }
+}

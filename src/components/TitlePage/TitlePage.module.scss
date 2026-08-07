@@ -1,0 +1,60 @@
+.titlePage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+
+  @media (max-width: 780px) {
+    height: 80vh;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(53deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
+    z-index: 1;
+  }
+
+  h1 {
+    position: relative;
+    z-index: 2;
+    font-family: "The Seasons serif", var(--font-josefin), serif;
+    font-size: 4rem;
+    line-height: 1.05;
+    max-width: min(1100px, calc(100% - 40px));
+    margin: 0;
+    padding: 20px 30px;
+    background: url("/assets/imgs-site/bkg-location.svg");
+    background-color: rgba(80, 0, 0, 0.88);
+    border: 2px solid #fff;
+    color: #fff;
+    text-shadow: -2px 2px rgba(0, 0, 0, 0.6);
+    font-weight: 100;
+  }
+
+  @media (max-width: 1024px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  @media (max-width: 780px) {
+    h1 {
+      font-size: 2.4rem;
+      padding: 18px 24px;
+    }
+  }
+
+  @media (max-width: 490px) {
+    h1 {
+      font-size: 1.9rem;
+      padding: 16px 18px;
+    }
+  }
+}

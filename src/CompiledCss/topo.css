@@ -1,0 +1,334 @@
+@charset "UTF-8";
+@keyframes header-move {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* ---------------------- Topo ------------------ */
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  font-family: "Libre Franklin", sans-serif;
+  animation-name: header-move;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+header .topo {
+  box-shadow: 0 0 20px black;
+  background-image: linear-gradient(300deg, rgba(225, 225, 225, 0.4196078431) 85%, #500000 50%);
+  background-color: #fff;
+}
+@media (max-width: 768px) {
+  header .topo {
+    box-shadow: 0px 0px 10px #d3d3d3;
+    display: flex;
+    align-items: center;
+  }
+}
+header .topo .topo-contato {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  background-color: #083f87;
+  color: white;
+  padding: 8px 0;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  header .topo .topo-contato {
+    display: none;
+  }
+}
+header .topo .topo-contato p {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  transition: 0.3s;
+}
+header .topo .topo-contato p i {
+  font-size: 16px;
+  position: relative;
+}
+header .topo .topo-contato a {
+  gap: 5px;
+  position: relative;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+header .topo .topo-contato a::before {
+  content: "";
+  background-color: #ffffff;
+  position: absolute;
+  left: 0px;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  transform: scaleX(0);
+  transition: 0.4s ease;
+  transform-origin: left;
+}
+header .topo .topo-contato a:hover::before {
+  transform: scaleX(1);
+}
+header .topo .topo-menu {
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+@media (max-width: 1024px) {
+  header .topo .topo-menu {
+    padding: 40px 0;
+  }
+}
+@media (max-width: 768px) {
+  header .topo .topo-menu {
+    display: none;
+  }
+}
+header .topo .topo-menu ul {
+  display: flex;
+  gap: 30px;
+}
+header .topo .topo-menu ul a {
+  color: #980000;
+  position: relative;
+  line-height: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Libre Franklin", sans-serif;
+}
+header .topo .topo-menu ul a::before {
+  content: "";
+  background-color: #980000;
+  position: absolute;
+  left: 0px;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  transform: scaleX(0);
+  transition: 0.4s ease;
+  transform-origin: center;
+}
+header .topo .topo-menu ul a:hover::before {
+  transform: scaleX(1);
+}
+header .topo .topo-menu ul .dropdown {
+  position: relative;
+}
+header .topo .topo-menu ul .dropdown:hover .dropdown-list {
+  display: flex;
+}
+header .topo .topo-menu ul .dropdown .dropdown-list {
+  display: none;
+  overflow-y: scroll;
+  position: absolute;
+  top: 100%;
+  left: -25px;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 220px;
+  max-height: 60vh;
+  flex-direction: column;
+  z-index: 10;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+header .topo .topo-menu ul .dropdown .dropdown-list a {
+  line-height: 20px;
+  font-size: 15px;
+}
+header .topo .topo-menu .topo-logo {
+  display: flex;
+}
+header .topo .topo-menu .topo-logo img {
+  width: 200px;
+}
+@media (max-width: 1024px) {
+  header .topo .topo-menu .topo-logo img {
+    width: 125px;
+  }
+}
+header .topo-mobile {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+header .topo-mobile i.burger {
+  padding-right: 20px;
+  font-size: 25px;
+}
+@media (min-width: 769px) {
+  header .topo-mobile i.burger {
+    display: none;
+  }
+}
+header .topo-mobile .topo-logo-mobile {
+  display: none;
+  width: 100%;
+  justify-content: center;
+}
+header .topo-mobile .topo-logo-mobile img {
+  width: 230px;
+  padding: 20px 0;
+}
+@media (max-width: 768px) {
+  header .topo-mobile .topo-logo-mobile {
+    display: flex;
+  }
+}
+header .topo-mobile {
+  /* Menu Hamburguer */
+}
+header .topo-mobile .hamburger-lines {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 26px;
+  width: 32px;
+  margin-right: 10px;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  header .topo-mobile .hamburger-lines {
+    display: flex;
+  }
+}
+header .topo-mobile .hamburger-lines .line {
+  height: 4px;
+  width: 100%;
+  border-radius: 10px;
+  background: #0e2431;
+  transition: all 0.2s ease-in-out;
+}
+header .topo-mobile .hamburger-lines .line1 {
+  transform-origin: center;
+}
+header .topo-mobile .hamburger-lines .line2 {
+  transform-origin: center;
+}
+header .topo-mobile .hamburger-lines .line3 {
+  transform-origin: center;
+}
+header .topo-mobile .hamburger-lines.active .line1 {
+  transform: translateY(12px) rotate(45deg);
+}
+header .topo-mobile .hamburger-lines.active .line2 {
+  opacity: 0;
+}
+header .topo-mobile .hamburger-lines.active .line3 {
+  transform: translateY(-10px) rotate(-45deg);
+}
+header .topo-mobile #menuMobile {
+  width: 101vw;
+  height: 100vh;
+  right: -100vw;
+  transition: 0.3s;
+  position: fixed;
+  top: 155px;
+  padding: 10px 0 0 0;
+}
+header .topo-mobile #menuMobile i.burger {
+  padding: 20px;
+}
+header .topo-mobile #menuMobile .dropdown-mobile {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+}
+header .topo-mobile #menuMobile .dropdown-mobile i {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+  padding: 5px;
+  border: #fff 2px solid;
+  border-radius: 50%;
+}
+header .topo-mobile #menuMobile .dropdown-mobile .dropdown-list-mobile {
+  display: none;
+}
+header .topo-mobile #menuMobile .dropdown-mobile .dropdown-list-mobile.ativo {
+  display: flex;
+  overflow-y: scroll;
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-height: 16vh;
+  flex-direction: column;
+  z-index: 10;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+header .topo-mobile #menuMobile .dropdown-mobile .dropdown-list-mobile.ativo a {
+  color: #000;
+  line-height: 20px;
+  font-size: 15px;
+}
+header .topo-mobile #menuMobile li {
+  padding: 15px 0;
+  width: 90%;
+  margin: 0 0 0 15px;
+}
+header .topo-mobile #menuMobile li a {
+  color: #fff;
+}
+header .topo-mobile #menuMobile.activeMenu {
+  right: 0;
+  background-color: #980000;
+}
+header.topo-scroll {
+  transform: translateY(-30px);
+}
+@media (max-width: 768px) {
+  header.topo-scroll {
+    transform: translateY(0);
+  }
+}
+header.topo-scroll .topo {
+  box-shadow: 0 0 20px black;
+  width: 95%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.6862745098);
+  background-image: linear-gradient(300deg, rgba(225, 225, 225, 0.4196078431) 85%, #500000 50%);
+  backdrop-filter: blur(50px);
+}
+@media (max-width: 1024px) {
+  header.topo-scroll .topo {
+    background-image: linear-gradient(300deg, rgba(225, 225, 225, 0.4196078431) 92%, #500000 50%);
+  }
+}
+header.topo-scroll .topo .topo-menu {
+  padding: 0;
+  margin-top: 20px;
+}
+
+header.scrolled {
+  animation: slideInTop 0.6s ease-out forwards;
+}
+
+@keyframes slideInTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    /* Vai para a posição final */
+    opacity: 1;
+    /* Fica visível */
+  }
+}

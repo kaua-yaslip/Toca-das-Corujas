@@ -1,0 +1,45 @@
+.scroll-button {
+  position: fixed;
+  right: 30px;
+  bottom: 38px;
+  z-index: 999999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: #ffffff;
+  background: #980000;
+  box-shadow: 0 8px 20px rgba(56, 0, 0, 0.32);
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease;
+}
+.scroll-button svg {
+  width: 15px;
+  height: 15px;
+}
+.scroll-button.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.scroll-button.hidden {
+  opacity: 0;
+  transform: translateY(70px);
+  pointer-events: none;
+}
+.scroll-button:hover {
+  background: #650000;
+  transform: translateY(-3px);
+}
+.scroll-button:focus-visible {
+  outline: 3px solid rgba(152, 0, 0, 0.3);
+  outline-offset: 4px;
+}
+@media (max-width: 768px) {
+  .scroll-button {
+    display: none;
+  }
+}

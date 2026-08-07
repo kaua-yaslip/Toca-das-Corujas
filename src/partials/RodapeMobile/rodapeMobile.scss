@@ -1,0 +1,64 @@
+@use "../../styles/Scss/colors.scss" as *;
+
+.rodape-mobile {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000000;
+  display: none;
+  width: 100%;
+  padding: 5px 0 max(5px, env(safe-area-inset-bottom));
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.94);
+  border-top: 1px solid rgba(80, 0, 0, 0.12);
+  box-shadow: 0 -5px 20px rgba(48, 59, 65, 0.25);
+  backdrop-filter: blur(14px);
+
+  .icones-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 8px;
+    width: min(100%, 520px);
+    margin: 0 auto;
+    padding: 0 10px;
+
+    a {
+      margin: 3px;
+      text-decoration: none;
+    }
+
+    .icone {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .phone { background: #558ada; }
+    .envelope { background: #d91818; }
+    .whatsapp { background: #49ca59; }
+  }
+}
+
+@media (max-width: 768px) {
+  .rodape-mobile {
+    display: block;
+  }
+}
+
+@media (max-width: 375px) {
+  .rodape-mobile .icones-rodape .icone {
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+  }
+}
