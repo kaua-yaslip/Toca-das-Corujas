@@ -47,7 +47,7 @@ export const settings: SiteSettings = {
     description,
     images: [
       {
-        url: "/assets/imgs-site/logo.webp",
+        url: "/assets/imgs-site/toca-das-corujas-logo.png",
         width: 300,
         height: 200,
         alt: "Toca das Corujas",
