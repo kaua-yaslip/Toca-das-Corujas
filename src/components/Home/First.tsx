@@ -22,7 +22,7 @@ export default function First() {
             <p>
               A Toca das Corujas oferece a você e seus convidados uma excelente
               opção na região para festas de aniversário, casamentos, eventos,
-              workshops, cursos, confraternizações de empresas, lazer e hospedagem.
+              workshops, cursos, confraternizações de empresas, lazer e hospedagem...
             </p>
 
             <p>
