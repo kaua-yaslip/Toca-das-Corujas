@@ -23,7 +23,7 @@ export default function Banner() {
       if (!unlockListenersActive) return;
 
       document.removeEventListener("pointerdown", unlockSound, true);
-      document.removeEventListener("click", unlockSound, true);
+      document.removeEventListener("click", unlockSound, false);
       document.removeEventListener("keydown", unlockSound, true);
       document.removeEventListener("touchstart", unlockSound, true);
       unlockListenersActive = false;

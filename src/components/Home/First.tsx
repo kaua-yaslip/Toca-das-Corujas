@@ -2,17 +2,26 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function First() {
   const [imagemAtiva, setImagemAtiva] = useState<"img1" | "img2">("img1");
+
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setImagemAtiva((imagemAtual) =>
+        imagemAtual === "img1" ? "img2" : "img1"
+      );
+    }, 4000); // troca a cada 4 segundos
+
+    return () => clearInterval(intervalo);
+  }, []);
 
   return (
     <section className="first">
       <div className="base">
         <div className="left">
           <div className="texto">
-
             <h1>
               Seja bem-vindo à
               <br />
@@ -22,7 +31,8 @@ export default function First() {
             <p>
               A Toca das Corujas oferece a você e seus convidados uma excelente
               opção na região para festas de aniversário, casamentos, eventos,
-              workshops, cursos, confraternizações de empresas, lazer e hospedagem...
+              workshops, cursos, confraternizações de empresas, lazer e
+              hospedagem...
             </p>
 
             <p>
@@ -42,12 +52,7 @@ export default function First() {
           className={`right imagem-ativa-${imagemAtiva}`}
           aria-label="Fotos da estrutura da Toca das Corujas"
         >
-          <div
-            className="img1"
-            tabIndex={0}
-            onMouseEnter={() => setImagemAtiva("img1")}
-            onFocus={() => setImagemAtiva("img1")}
-          >
+          <div className="img1">
             <Image
               src="/assets/toca-das-corujas/foto-40.webp"
               alt="Área externa da Toca das Corujas"
@@ -57,12 +62,7 @@ export default function First() {
             />
           </div>
 
-          <div
-            className="img2"
-            tabIndex={0}
-            onMouseEnter={() => setImagemAtiva("img2")}
-            onFocus={() => setImagemAtiva("img2")}
-          >
+          <div className="img2">
             <Image
               src="/assets/toca-das-corujas/foto-25.webp"
               alt="Estrutura interna da Toca das Corujas"

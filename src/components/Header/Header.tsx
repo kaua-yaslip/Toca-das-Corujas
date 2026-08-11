@@ -60,7 +60,7 @@ export default function Header() {
           <div className="topo-logo">
             <Link href="/" aria-label="Página inicial da Toca das Corujas">
               <Image
-                src="/assets/imgs-site/toca-das-corujas-logo.png"
+                src="/assets/imgs-site/logo.webp"
                 alt="Toca das Corujas"
                 width={200}
                 height={80}
@@ -107,7 +107,7 @@ export default function Header() {
         <div className="topo-logo-mobile">
           <Link href="/" onClick={fecharMenu} aria-label="Página inicial da Toca das Corujas">
             <Image
-              src="/assets/imgs-site/toca-das-corujas-logo.png"
+              src="/assets/imgs-site/logo.webp"
               alt="Toca das Corujas"
               width={230}
               height={92}
