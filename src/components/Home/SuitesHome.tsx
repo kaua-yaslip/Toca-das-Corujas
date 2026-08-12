@@ -84,9 +84,8 @@ export default function SuitesHome() {
                     <Image
                       src={foto.src}
                       alt={foto.alt}
-                      width={1000}
-                      height={750}
-                      sizes="(max-width: 760px) 100vw, (max-width: 1100px) 60vw, 48vw"
+                      fill
+                      sizes="(max-width: 760px) 100vw, (max-width: 1100px) 100vw, 58vw"
                     />
                   </figure>
                 ))}

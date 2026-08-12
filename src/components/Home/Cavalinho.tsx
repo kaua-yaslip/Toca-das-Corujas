@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { FaArrowDown, FaPlay } from "react-icons/fa6";
 
 interface FotoCavalinho {
@@ -11,7 +12,7 @@ interface FotoCavalinho {
   video?: string;
 }
 
-const VIDEO_CAVALO_COM_MUSICA = "/assets/imgs-site/videos/cavalo-com-musica.mp4";
+const VIDEO_CAVALO_COM_MUSICA = "/assets/imgs-site/pocoto.mp4";
 
 const fotosDestaque: FotoCavalinho[] = [
   {
@@ -65,6 +66,67 @@ const fotosCavalos: Record<number, string> = {
 
 const caminho = (numero: number) => fotosCavalos[numero];
 
+
+function VideoPocoto({ src, ariaLabel }: { src: string; ariaLabel: string }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const iniciar = async () => {
+      video.volume = 1;
+      video.muted = false;
+
+      try {
+        await video.play();
+      } catch {
+        // Fallback necessário para navegadores que bloqueiam autoplay com áudio.
+        video.muted = true;
+        await video.play().catch(() => undefined);
+      }
+    };
+
+    const liberarSom = () => {
+      const atual = videoRef.current;
+      if (!atual) return;
+
+      atual.muted = false;
+      atual.volume = 1;
+      void atual.play().catch(() => undefined);
+      removerEventos();
+    };
+
+    const removerEventos = () => {
+      window.removeEventListener("pointerdown", liberarSom);
+      window.removeEventListener("touchstart", liberarSom);
+      window.removeEventListener("keydown", liberarSom);
+    };
+
+    void iniciar();
+    window.addEventListener("pointerdown", liberarSom, { passive: true });
+    window.addEventListener("touchstart", liberarSom, { passive: true });
+    window.addEventListener("keydown", liberarSom);
+
+    return removerEventos;
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      autoPlay
+      loop
+      controls
+      playsInline
+      preload="metadata"
+      aria-label={ariaLabel}
+    >
+      Seu navegador não suporta vídeos HTML5.
+    </video>
+  );
+}
+
 const galeriaUrl =
   "https://photos.google.com/share/AF1QipO6f9j0_bksZWO0Itbvh6H1pl3D1VkQnl05augD3-tAzWIdXIvnKddjP85rReFIAA/memory/AF1QipMT_2AkCW0zasrmOITahWgHO8x1u_uB14yetH3kjNwIPHFFuAT8fm1dkeSdcErIXA?key=bjhxOHpJRkFRRHdWZ0NRT3h2aGdYc250alJtNE1B";
 
@@ -82,15 +144,10 @@ function FotoCard({
       className={`cavalinho-foto-card${destaque ? " cavalinho-foto-card--destaque" : ""}${foto.video ? " cavalinho-foto-card--video" : ""}`}
     >
       {foto.video ? (
-        <video
+        <VideoPocoto
           src={foto.video}
-          controls
-          playsInline
-          preload="metadata"
-          aria-label={`${foto.titulo} na Toca das Corujas`}
-        >
-          Seu navegador não suporta vídeos HTML5.
-        </video>
+          ariaLabel={`${foto.titulo} na Toca das Corujas`}
+        />
       ) : (
         <Image
           src={caminho(foto.numero)}

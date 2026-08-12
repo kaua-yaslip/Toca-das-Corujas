@@ -1,104 +1,56 @@
-# Mídias do projeto Toca das Corujas
+# Mídias do projeto
 
-Os caminhos usados no código partem sempre da pasta `public` do Next.js.
+Os arquivos enviados nesta revisão foram colocados diretamente em `public/assets/imgs-site/`, portanto os caminhos usados pelo navegador começam em `/assets/imgs-site/`.
 
-Exemplo: o caminho JSX `/assets/imgs-site/corujas/corujaicone.png` corresponde ao arquivo físico `public/assets/imgs-site/corujas/corujaicone.png`.
+## Arquivos adicionados nesta revisão
 
-## Ícone da aba
+- `public/assets/imgs-site/corujaicone.png`
+- `public/assets/imgs-site/corujamobile.mp4`
+- `public/assets/imgs-site/pocoto.mp4`
+
+Também foi mantida uma cópia do ícone em:
 
 - `public/assets/imgs-site/logo-icon.png`
 
-## Ícone das corujas nos cards da Home
+## Vídeo de abertura da Home
 
-O símbolo antigo foi substituído pela imagem enviada:
+### Desktop
 
-- `public/assets/imgs-site/corujas/corujaicone.png`
-
-Esse arquivo já está incluído nesta versão do projeto.
-
-## Novas fotos das suítes
-
-As sete imagens novas enviadas foram adicionadas ao projeto:
-
-- `public/assets/imgs-site/suites/ImagensSuites1.jpeg`
-- `public/assets/imgs-site/suites/ImagensSuites2.jpeg`
-- `public/assets/imgs-site/suites/ImagensSuites3.jpeg`
-- `public/assets/imgs-site/suites/ImagensSuites4.jpeg`
-- `public/assets/imgs-site/suites/ImagensSuites5.jpeg`
-- `public/assets/imgs-site/suites/ImagensSuites6.jpeg`
-- `public/assets/imgs-site/suites/ImagensSuites7.jpeg`
-
-A seção da Home agora apresenta Standard, Luxo e Master em formato de mosaico com várias imagens, seguindo a referência enviada.
-
-Para as galerias de Luxo e Master, o componente reaproveita também os caminhos de suítes que já existem nas páginas antigas do projeto, todos dentro de:
-
-- `public/assets/imgs-site/suites/`
-
-## Seção "Conheça mais partes da Toca das Corujas"
-
-A galeria da Home foi ampliada para 18 imagens e mistura entrada, acomodações, piscina, cozinha, estrutura, lazer e natureza.
-
-As seis imagens novas da entrada já estão incluídas nesta versão:
-
-- `public/assets/imgs-site/galeria-geral/entrada-01.webp`
-- `public/assets/imgs-site/galeria-geral/entrada-02.webp`
-- `public/assets/imgs-site/galeria-geral/entrada-03.webp`
-- `public/assets/imgs-site/galeria-geral/entrada-04.webp`
-- `public/assets/imgs-site/galeria-geral/entrada-05.webp`
-- `public/assets/imgs-site/galeria-geral/entrada-06.webp`
-
-A seção também utiliza imagens já existentes do projeto em:
-
-- `public/assets/toca-das-corujas/`
-- `public/assets/imgs-site/suites/`
-
-## Mapa feito à mão - Contato
-
-- `public/assets/imgs-site/contato/mapa-feito-a-mao.webp`
-
-## Vídeos da Home
-
-### Vídeo de abertura
-
-Caminho principal:
+O código procura primeiro:
 
 - `public/assets/imgs-site/banner/banner3.mp4`
 
-Caminhos alternativos aceitos pelo código:
+No navegador, o caminho correspondente é:
 
-- `public/assets/imgs-site/banner3.mp4`
-- `public/banner3.mp4`
+- `/assets/imgs-site/banner/banner3.mp4`
 
-### Banner desktop da Home
+Se `banner3.mp4` não estiver disponível, o componente usa `corujamobile.mp4` como fallback para não deixar a abertura sem vídeo.
 
-- `public/assets/imgs-site/bannervideo.mp4`
+### Mobile
 
-### Banner mobile da Home
+No responsivo, o vídeo de abertura passa a usar diretamente:
 
-- `public/assets/imgs-site/banner/bannervideo-mobile.mp4`
+- `public/assets/imgs-site/corujamobile.mp4`
 
-## Vídeos solicitados
+O componente tenta iniciar o vídeo com o áudio existente dentro do próprio MP4. Se o navegador bloquear autoplay com som, o vídeo continua e o áudio é liberado na primeira interação do visitante com a página.
 
-### Diversão em família
+## Vídeo Pocotó
 
-- `public/assets/imgs-site/videos/cavalo-com-musica.mp4`
+O vídeo usado na seção de cavalos está em:
 
-### Vídeo original da mulher - página Sobre
+- `public/assets/imgs-site/pocoto.mp4`
 
-- `public/assets/imgs-site/videos/video-original-mulher.mp4`
+Ele está configurado para iniciar automaticamente, repetir em loop e funcionar em modo `playsInline` no celular.
 
-## Página Sobre
+## Banner principal
 
-- Banner: `public/assets/imgs-site/sobre/banner-sobre.webp`
-- Imagem principal: `public/assets/imgs-site/sobre/sobre-destaque-01.webp`
-- Imagem secundária: `public/assets/imgs-site/sobre/sobre-destaque-02.webp`
-- Imagem da seção de lazer: `public/assets/imgs-site/sobre/sobre-lazer-destaque.webp`
-- Poster do vídeo: `public/assets/imgs-site/sobre/video-original-poster.webp`
-- Imagem do CTA final: `public/assets/imgs-site/sobre/cta-sobre.webp`
-- Galeria adicional: `public/assets/imgs-site/sobre/galeria-01.webp` até `public/assets/imgs-site/sobre/galeria-15.webp`
+Os caminhos já utilizados pelo projeto continuam sendo:
 
-## Observação sobre autoplay com som
+- Desktop: `public/assets/imgs-site/bannervideo.mp4`
+- Mobile: `public/assets/imgs-site/banner/bannervideo-mobile.mp4`
 
-O navegador pode bloquear autoplay com áudio antes de qualquer interação do visitante. O código pode solicitar a reprodução com som, mas Chrome, Safari, Edge e outros navegadores mantêm suas próprias políticas de autoplay.
+## Observação importante sobre autoplay com áudio
 
-Ao fechar o vídeo de abertura, o componente pausa a reprodução e interrompe o áudio.
+Chrome, Edge, Safari e navegadores mobile podem bloquear autoplay com áudio antes de qualquer interação do usuário. O código faz primeiro uma tentativa com `muted = false` e `volume = 1`. Quando o navegador rejeita essa reprodução, o vídeo é iniciado de forma compatível e o áudio é ativado assim que ocorre a primeira interação na página.
+
+Ao fechar o vídeo de abertura, o componente executa `pause()`, coloca o volume em zero e interrompe o áudio imediatamente.

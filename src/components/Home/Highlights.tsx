@@ -7,7 +7,7 @@ const cards = [
 ];
 
 // Ícone enviado para substituir o símbolo antigo da coruja nos cards.
-const CORUJA_DESTAQUE = "/assets/imgs-site/corujas/corujaicone.png";
+const CORUJA_DESTAQUE = "/assets/imgs-site/corujaicone.png";
 
 export default function Highlights() {
   return (

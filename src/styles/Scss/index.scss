@@ -116,8 +116,10 @@ canvas {
 
 @media (max-width: 768px) {
   .home-fullscreen-video {
-    object-fit: contain;
-    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    width: 100vw;
+    height: 100dvh;
   }
 
   .home-video-close {
@@ -777,10 +779,9 @@ canvas {
   width: 100%;
   padding: 80px 4%;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.86)),
-    url("/assets/imgs-site/fundo-pattern.webp");
-  background-repeat: repeat;
-  background-size: 180px;
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+    radial-gradient(circle at 20px 20px, rgba(112, 16, 18, 0.08) 1.5px, transparent 1.6px);
+  background-size: auto, 42px 42px;
 
   .cards-recinto {
     width: 100%;
@@ -5192,6 +5193,227 @@ canvas {
     .galeria-atualizada-item--18 {
       grid-column: auto;
       grid-row: auto;
+    }
+  }
+}
+
+/* ==================================================
+   Ajustes finais 12/08 - vídeos, mídias e suítes
+================================================== */
+
+/* O ícone enviado fica sem o bloco branco exagerado e integrado ao card. */
+.second .cards .card .coruja-icone {
+  width: 82px;
+  height: 104px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 28px rgba(39, 12, 9, 0.2);
+}
+
+.second .cards .card .coruja-icone .coruja {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Corrige a composição que deixava a Suíte Master excessivamente alta. */
+.suites {
+  .comidas-suites {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .suites-item,
+  .suites-item:last-child {
+    display: grid;
+    width: 100%;
+    min-height: 0;
+    grid-template-columns: minmax(280px, 0.34fr) minmax(0, 0.66fr);
+    align-items: stretch;
+    justify-self: stretch;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+
+  .suites-item:nth-child(even) {
+    grid-template-columns: minmax(0, 0.66fr) minmax(280px, 0.34fr);
+  }
+
+  .suites-informacoes {
+    min-height: 500px;
+    height: 100%;
+    padding: 46px 40px;
+  }
+
+  .suites-galeria {
+    display: grid;
+    width: 100%;
+    height: 500px;
+    min-height: 0;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    padding: 7px;
+    overflow: hidden;
+    background: #e9dfd6;
+  }
+
+  .suites-foto {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 14px;
+    clip-path: none;
+  }
+
+  .suites-foto--1 {
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+  }
+
+  .suites-foto--2 {
+    grid-column: 4 / 7;
+    grid-row: 1;
+  }
+
+  .suites-foto--3 {
+    grid-column: 4;
+    grid-row: 2;
+  }
+
+  .suites-foto--4 {
+    grid-column: 5;
+    grid-row: 2;
+  }
+
+  .suites-foto--5 {
+    grid-column: 6;
+    grid-row: 2;
+  }
+
+  .suites-foto img,
+  .suites-foto--4 img,
+  .suites-foto--5 img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center;
+    transform: none;
+  }
+
+  .suites-foto:hover img,
+  .suites-foto--5:hover img {
+    transform: scale(1.035);
+  }
+}
+
+/* Pocotó fica bonito mesmo sendo um vídeo vertical/horizontal diferente. */
+.cavalinho-foto-card--video video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  background: #1b0c0b;
+}
+
+@media (max-width: 1100px) {
+  .suites {
+    .suites-item,
+    .suites-item:last-child,
+    .suites-item:nth-child(even) {
+      grid-template-columns: 1fr;
+    }
+
+    .suites-item:nth-child(even) {
+      .suites-informacoes {
+        order: 1;
+      }
+
+      .suites-galeria {
+        order: 2;
+      }
+    }
+
+    .suites-informacoes {
+      min-height: 0;
+      padding: 34px 34px 32px;
+    }
+
+    .suites-galeria {
+      height: 470px;
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .home-video-overlay {
+    min-height: 100dvh;
+  }
+
+  .home-fullscreen-video {
+    width: 100vw;
+    height: 100dvh;
+    min-width: 100vw;
+    min-height: 100dvh;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .second .cards .card .coruja-icone {
+    width: 66px;
+    height: 86px;
+  }
+
+  .suites {
+    .suites-item,
+    .suites-item:last-child {
+      width: 100%;
+      border-radius: 18px;
+    }
+
+    .suites-informacoes {
+      padding: 28px 24px;
+    }
+
+    .suites-galeria {
+      height: 520px;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-rows: 245px 127px 127px;
+      gap: 6px;
+      padding: 6px;
+    }
+
+    .suites-foto--1 {
+      grid-column: 1 / 7;
+      grid-row: 1;
+    }
+
+    .suites-foto--2 {
+      grid-column: 1 / 4;
+      grid-row: 2;
+    }
+
+    .suites-foto--3 {
+      grid-column: 4 / 7;
+      grid-row: 2;
+    }
+
+    .suites-foto--4 {
+      grid-column: 1 / 4;
+      grid-row: 3;
+    }
+
+    .suites-foto--5 {
+      grid-column: 4 / 7;
+      grid-row: 3;
     }
   }
 }
