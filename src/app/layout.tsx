@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     template: "%s | Toca das Corujas",
   },
   description: "Toca das Corujas, hotel fazenda em Angatuba, São Paulo.",
+  icons: {
+    icon: "/assets/imgs-site/logo-icon.png",
+    shortcut: "/assets/imgs-site/logo-icon.png",
+    apple: "/assets/imgs-site/logo-icon.png",
+  },
 };
 
 interface RootLayoutProps {
