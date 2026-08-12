@@ -31,7 +31,7 @@ export default function Banner() {
 
     // O vídeo começa mudo para o navegador não bloquear o autoplay.
     // Assim que a reprodução já começou, tentamos liberar o áudio sem botão.
-    video.volume = 0;
+    video.volume = 1;
     video.defaultMuted = false;
     video.muted = false;
 
@@ -48,8 +48,8 @@ export default function Banner() {
       if (tentativa) {
         void tentativa.catch(() => {
           // Se o navegador bloquear áudio automático, não deixamos o vídeo parar.
-          atual.defaultMuted = true;
-          atual.muted = true;
+          atual.defaultMuted = false;
+          atual.muted = false;
           atual.volume = 1;
           void atual.play().catch(() => undefined);
         });
@@ -68,8 +68,8 @@ export default function Banner() {
     // Autoplay confiável: primeiro inicia mudo.
     video.autoplay = true;
     video.playsInline = true;
-    video.defaultMuted = true;
-    video.muted = true;
+    video.defaultMuted = false;
+    video.muted = false;
     video.volume = 1;
 
     try {
