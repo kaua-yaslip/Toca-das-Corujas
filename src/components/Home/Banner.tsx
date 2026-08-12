@@ -2,121 +2,148 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const INTRO_VIDEO = "/assets/imgs-site/banner/banner3.mp4";
+// O mesmo banner3.mp4 é usado em desktop e mobile.
+// Mantemos caminhos alternativos para também funcionar caso o arquivo
+// tenha sido colocado diretamente em /assets/imgs-site ou em /public.
+const INTRO_VIDEO_PATHS = [
+  "/assets/imgs-site/banner/banner3.mp4",
+  "/assets/imgs-site/banner3.mp4",
+  "/banner3.mp4",
+];
 
 const BANNER_VIDEO_DESKTOP = "/assets/imgs-site/bannervideo.mp4";
-const BANNER_VIDEO_MOBILE =
-  "/assets/imgs-site/banner/bannervideo-mobile.mp4";
+const BANNER_VIDEO_MOBILE = "/assets/imgs-site/banner/bannervideo-mobile.mp4";
 
 export default function Banner() {
   const [showIntroVideo, setShowIntroVideo] = useState(true);
-
+  const [introVideoIndex, setIntroVideoIndex] = useState(0);
   const introVideoRef = useRef<HTMLVideoElement | null>(null);
+  const audioTimersRef = useRef<number[]>([]);
+
+  const limparTentativasDeAudio = useCallback(() => {
+    audioTimersRef.current.forEach((timer) => window.clearTimeout(timer));
+    audioTimersRef.current = [];
+  }, []);
+
+  const tentarLiberarSom = useCallback(() => {
+    const video = introVideoRef.current;
+    if (!video || !showIntroVideo) return;
+
+    // O vídeo começa mudo para o navegador não bloquear o autoplay.
+    // Assim que a reprodução já começou, tentamos liberar o áudio sem botão.
+    video.volume = 0;
+    video.defaultMuted = false;
+    video.muted = false;
+
+    const aumentarVolume = window.setTimeout(() => {
+      const atual = introVideoRef.current;
+      if (!atual || !showIntroVideo) return;
+
+      atual.muted = false;
+      atual.defaultMuted = false;
+      atual.volume = 1;
+
+      // Reforça a reprodução caso algum navegador pause ao retirar o mute.
+      const tentativa = atual.play();
+      if (tentativa) {
+        void tentativa.catch(() => {
+          // Se o navegador bloquear áudio automático, não deixamos o vídeo parar.
+          atual.defaultMuted = true;
+          atual.muted = true;
+          atual.volume = 1;
+          void atual.play().catch(() => undefined);
+        });
+      }
+    }, 120);
+
+    audioTimersRef.current.push(aumentarVolume);
+  }, [showIntroVideo]);
+
+  const iniciarIntro = useCallback(async () => {
+    const video = introVideoRef.current;
+    if (!video || !showIntroVideo) return;
+
+    limparTentativasDeAudio();
+
+    // Autoplay confiável: primeiro inicia mudo.
+    video.autoplay = true;
+    video.playsInline = true;
+    video.defaultMuted = true;
+    video.muted = true;
+    video.volume = 1;
+
+    try {
+      await video.play();
+    } catch {
+      // O onCanPlay/onLoadedData fará uma nova tentativa quando o arquivo estiver pronto.
+      return;
+    }
+
+    // Depois que o vídeo já está tocando, tenta habilitar o som automaticamente.
+    tentarLiberarSom();
+
+    // Alguns navegadores só aceitam a mudança alguns instantes depois.
+    [350, 900, 1800].forEach((delay) => {
+      const timer = window.setTimeout(() => {
+        const atual = introVideoRef.current;
+        if (!atual || !showIntroVideo || atual.ended) return;
+
+        atual.defaultMuted = false;
+        atual.muted = false;
+        atual.volume = 1;
+      }, delay);
+
+      audioTimersRef.current.push(timer);
+    });
+  }, [limparTentativasDeAudio, showIntroVideo, tentarLiberarSom]);
 
   const fecharIntroVideo = useCallback(() => {
-    const video = introVideoRef.current;
+    limparTentativasDeAudio();
 
+    const video = introVideoRef.current;
     if (video) {
+      // Para vídeo e áudio imediatamente antes de remover o overlay.
       video.pause();
       video.muted = true;
+      video.defaultMuted = true;
       video.volume = 0;
 
       try {
         video.currentTime = 0;
-      } catch {}
-
-      video.removeAttribute("src");
-      video.load();
+      } catch {
+        // O pause acima já garante que nenhum áudio continue tocando.
+      }
     }
 
     setShowIntroVideo(false);
+  }, [limparTentativasDeAudio]);
+
+  const tentarProximoCaminho = useCallback(() => {
+    setIntroVideoIndex((indiceAtual) => {
+      if (indiceAtual >= INTRO_VIDEO_PATHS.length - 1) {
+        return indiceAtual;
+      }
+      return indiceAtual + 1;
+    });
   }, []);
 
   useEffect(() => {
     if (!showIntroVideo) return;
 
     const video = introVideoRef.current;
-
     if (!video) return;
 
-    const iniciar = async () => {
-      /*
-       * PRIMEIRA TENTATIVA:
-       * tenta iniciar COM SOM.
-       */
-      video.muted = false;
-      video.defaultMuted = false;
-      video.volume = 1;
-
-      try {
-        await video.play();
-
-        console.log("Vídeo iniciado com áudio.");
-
-        return;
-      } catch (error) {
-        console.log(
-          "Autoplay com áudio bloqueado pelo navegador.",
-          error
-        );
-      }
-
-      /*
-       * FALLBACK:
-       * se o navegador bloquear áudio,
-       * inicia o vídeo mudo para ele não ficar parado.
-       */
-      video.muted = true;
-      video.defaultMuted = true;
-      video.volume = 0;
-
-      try {
-        await video.play();
-      } catch (error) {
-        console.error("Não foi possível iniciar o vídeo:", error);
-      }
-    };
-
-    void iniciar();
-
-    /*
-     * Quando houver QUALQUER interação do usuário,
-     * libera o som automaticamente.
-     *
-     * Não precisa clicar em botão específico.
-     */
-    const liberarSom = async () => {
-      const atual = introVideoRef.current;
-
-      if (!atual) return;
-
-      atual.muted = false;
-      atual.defaultMuted = false;
-      atual.volume = 1;
-
-      try {
-        await atual.play();
-      } catch {}
-
-      removerEventos();
-    };
-
-    const removerEventos = () => {
-      window.removeEventListener("pointerdown", liberarSom);
-      window.removeEventListener("touchstart", liberarSom);
-      window.removeEventListener("keydown", liberarSom);
-    };
-
-    window.addEventListener("pointerdown", liberarSom);
-    window.addEventListener("touchstart", liberarSom);
-    window.addEventListener("keydown", liberarSom);
+    // Quando o caminho muda, força o carregamento do novo arquivo.
+    video.load();
+    void iniciarIntro();
 
     return () => {
-      removerEventos();
-
+      limparTentativasDeAudio();
       video.pause();
+      video.muted = true;
+      video.volume = 0;
     };
-  }, [showIntroVideo]);
+  }, [introVideoIndex, iniciarIntro, limparTentativasDeAudio, showIntroVideo]);
 
   return (
     <>
@@ -124,10 +151,17 @@ export default function Banner() {
         <div className="home-video-overlay">
           <video
             ref={introVideoRef}
+            key={INTRO_VIDEO_PATHS[introVideoIndex]}
             className="home-fullscreen-video"
-            src={INTRO_VIDEO}
+            src={INTRO_VIDEO_PATHS[introVideoIndex]}
+            autoPlay
+            muted
             playsInline
             preload="auto"
+            onLoadedData={() => void iniciarIntro()}
+            onCanPlay={() => void iniciarIntro()}
+            onPlaying={tentarLiberarSom}
+            onError={tentarProximoCaminho}
             onEnded={fecharIntroVideo}
           >
             Seu navegador não suporta vídeos HTML5.
@@ -154,17 +188,8 @@ export default function Banner() {
             playsInline
             preload="metadata"
           >
-            <source
-              media="(max-width: 900px)"
-              src={BANNER_VIDEO_MOBILE}
-              type="video/mp4"
-            />
-
-            <source
-              src={BANNER_VIDEO_DESKTOP}
-              type="video/mp4"
-            />
-
+            <source media="(max-width: 900px)" src={BANNER_VIDEO_MOBILE} type="video/mp4" />
+            <source src={BANNER_VIDEO_DESKTOP} type="video/mp4" />
             Seu navegador não suporta vídeos HTML5.
           </video>
         </div>

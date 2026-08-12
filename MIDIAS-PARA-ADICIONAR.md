@@ -1,25 +1,56 @@
-# Mídias que precisam ser adicionadas
+# Mídias do projeto Toca das Corujas
 
-Os caminhos do código já estão prontos. Em Next.js, coloque os arquivos dentro de `public` exatamente nos locais abaixo. Exemplo: o caminho usado no JSX `/assets/imgs-site/contato/mapa-feito-a-mao.webp` corresponde ao arquivo `public/assets/imgs-site/contato/mapa-feito-a-mao.webp`.
+Os caminhos usados no código partem sempre da pasta `public` do Next.js.
+
+Exemplo: o caminho JSX `/assets/imgs-site/corujas/corujaicone.png` corresponde ao arquivo físico `public/assets/imgs-site/corujas/corujaicone.png`.
 
 ## Ícone da aba
 
 - `public/assets/imgs-site/logo-icon.png`
 
-## Coruja dos cards da Home
+## Ícone das corujas nos cards da Home
 
-- `public/assets/imgs-site/corujas/coruja-mae-filhote.png`
+O símbolo antigo foi substituído pela imagem enviada:
 
-## Galeria mesclada da Home
+- `public/assets/imgs-site/corujas/corujaicone.png`
+
+Esse arquivo já está incluído nesta versão do projeto.
+
+## Novas fotos das suítes
+
+As sete imagens novas enviadas foram adicionadas ao projeto:
+
+- `public/assets/imgs-site/suites/ImagensSuites1.jpeg`
+- `public/assets/imgs-site/suites/ImagensSuites2.jpeg`
+- `public/assets/imgs-site/suites/ImagensSuites3.jpeg`
+- `public/assets/imgs-site/suites/ImagensSuites4.jpeg`
+- `public/assets/imgs-site/suites/ImagensSuites5.jpeg`
+- `public/assets/imgs-site/suites/ImagensSuites6.jpeg`
+- `public/assets/imgs-site/suites/ImagensSuites7.jpeg`
+
+A seção da Home agora apresenta Standard, Luxo e Master em formato de mosaico com várias imagens, seguindo a referência enviada.
+
+Para as galerias de Luxo e Master, o componente reaproveita também os caminhos de suítes que já existem nas páginas antigas do projeto, todos dentro de:
+
+- `public/assets/imgs-site/suites/`
+
+## Seção "Conheça mais partes da Toca das Corujas"
+
+A galeria da Home foi ampliada para 18 imagens e mistura entrada, acomodações, piscina, cozinha, estrutura, lazer e natureza.
+
+As seis imagens novas da entrada já estão incluídas nesta versão:
 
 - `public/assets/imgs-site/galeria-geral/entrada-01.webp`
-- `public/assets/imgs-site/galeria-geral/estrutura-01.webp`
-- `public/assets/imgs-site/galeria-geral/lazer-01.webp`
-- `public/assets/imgs-site/galeria-geral/suite-01.webp`
-- `public/assets/imgs-site/galeria-geral/natureza-01.webp`
 - `public/assets/imgs-site/galeria-geral/entrada-02.webp`
-- `public/assets/imgs-site/galeria-geral/cavalos-01.webp`
-- `public/assets/imgs-site/galeria-geral/piscina-01.webp`
+- `public/assets/imgs-site/galeria-geral/entrada-03.webp`
+- `public/assets/imgs-site/galeria-geral/entrada-04.webp`
+- `public/assets/imgs-site/galeria-geral/entrada-05.webp`
+- `public/assets/imgs-site/galeria-geral/entrada-06.webp`
+
+A seção também utiliza imagens já existentes do projeto em:
+
+- `public/assets/toca-das-corujas/`
+- `public/assets/imgs-site/suites/`
 
 ## Mapa feito à mão - Contato
 
@@ -27,15 +58,34 @@ Os caminhos do código já estão prontos. Em Next.js, coloque os arquivos dentr
 
 ## Vídeos da Home
 
-- Vídeo de abertura (desktop e mobile): `public/assets/imgs-site/banner/banner3.mp4`
-  - Caminhos alternativos aceitos pelo código: `public/assets/imgs-site/banner3.mp4` ou `public/banner3.mp4`
-- Banner desktop da Home: `public/assets/imgs-site/bannervideo.mp4`
-- Banner mobile da Home: `public/assets/imgs-site/banner/bannervideo-mobile.mp4`
+### Vídeo de abertura
+
+Caminho principal:
+
+- `public/assets/imgs-site/banner/banner3.mp4`
+
+Caminhos alternativos aceitos pelo código:
+
+- `public/assets/imgs-site/banner3.mp4`
+- `public/banner3.mp4`
+
+### Banner desktop da Home
+
+- `public/assets/imgs-site/bannervideo.mp4`
+
+### Banner mobile da Home
+
+- `public/assets/imgs-site/banner/bannervideo-mobile.mp4`
 
 ## Vídeos solicitados
 
-- Card "Diversão em família" com música: `public/assets/imgs-site/videos/cavalo-com-musica.mp4`
-- Vídeo original com a mulher falando, usado na página Sobre: `public/assets/imgs-site/videos/video-original-mulher.mp4`
+### Diversão em família
+
+- `public/assets/imgs-site/videos/cavalo-com-musica.mp4`
+
+### Vídeo original da mulher - página Sobre
+
+- `public/assets/imgs-site/videos/video-original-mulher.mp4`
 
 ## Página Sobre
 
@@ -43,10 +93,12 @@ Os caminhos do código já estão prontos. Em Next.js, coloque os arquivos dentr
 - Imagem principal: `public/assets/imgs-site/sobre/sobre-destaque-01.webp`
 - Imagem secundária: `public/assets/imgs-site/sobre/sobre-destaque-02.webp`
 - Imagem da seção de lazer: `public/assets/imgs-site/sobre/sobre-lazer-destaque.webp`
-- Poster do vídeo original: `public/assets/imgs-site/sobre/video-original-poster.webp`
+- Poster do vídeo: `public/assets/imgs-site/sobre/video-original-poster.webp`
 - Imagem do CTA final: `public/assets/imgs-site/sobre/cta-sobre.webp`
 - Galeria adicional: `public/assets/imgs-site/sobre/galeria-01.webp` até `public/assets/imgs-site/sobre/galeria-15.webp`
 
 ## Observação sobre autoplay com som
 
-A Home inicia o `banner3.mp4` automaticamente em modo compatível com autoplay e, logo após a reprodução começar, tenta liberar o áudio sem exibir botões. Ao fechar o vídeo, o código executa `pause()`, zera o volume e interrompe o áudio imediatamente. Observação: Chrome, Safari e outros navegadores podem bloquear áudio automático sem interação por uma política do próprio navegador; não existe código JavaScript capaz de obrigar o navegador a ignorar essa regra.
+O navegador pode bloquear autoplay com áudio antes de qualquer interação do visitante. O código pode solicitar a reprodução com som, mas Chrome, Safari, Edge e outros navegadores mantêm suas próprias políticas de autoplay.
+
+Ao fechar o vídeo de abertura, o componente pausa a reprodução e interrompe o áudio.
