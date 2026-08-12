@@ -1,0 +1,11 @@
+Coloque o arquivo banner3.mp4 nesta pasta.
+
+Caminho esperado pelo projeto:
+public/assets/imgs-site/banner/banner3.mp4
+
+URL no navegador:
+/assets/imgs-site/banner/banner3.mp4
+
+O código também tenta automaticamente estes caminhos alternativos:
+/assets/imgs-site/banner3.mp4
+/banner3.mp4

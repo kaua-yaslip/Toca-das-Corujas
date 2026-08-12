@@ -4834,26 +4834,6 @@ canvas {
    Ajustes finais solicitados no PDF - 12/08/2026
 ================================================== */
 
-/* Fallback exibido somente quando o navegador bloqueia autoplay com áudio. */
-.home-video-sound {
-  position: fixed;
-  z-index: 100000;
-  left: 16px;
-  bottom: 16px;
-  min-height: 42px;
-  padding: 9px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  border-radius: 999px;
-  color: #fff;
-  background: rgba(86, 0, 0, 0.82);
-  font-family: "Libre Franklin", sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.22);
-}
-
 /* A imagem das corujas enviada pelo cliente substitui os símbolos antigos. */
 .second .cards .card .coruja {
   width: 76px;
@@ -4930,11 +4910,6 @@ canvas {
     min-height: calc(100dvh - 82px);
   }
 
-  .home-video-sound {
-    left: 12px;
-    bottom: 12px;
-    font-size: 12px;
-  }
 
   .cavalinho .cavalinho-foto-card.cavalinho-foto-card--video figcaption {
     bottom: 54px;

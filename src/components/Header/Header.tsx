@@ -24,7 +24,7 @@ const suitesLinks = [
   ["/suites#suites-luxo", "Suítes Luxo"],
   ["/suites#suites-master-sem-banheiras", "Suítes Master sem Banheiras"],
   ["/suites#suites-master-com-banheiras", "Suítes Master com Banheiras"],
-  ["/suites#suites-simples", "Suítes Standart"],
+  ["/suites#suites-simples", "Suítes Simples"],
 ] as const;
 
 export default function Header() {

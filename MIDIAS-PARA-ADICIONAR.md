@@ -27,8 +27,8 @@ Os caminhos do código já estão prontos. Em Next.js, coloque os arquivos dentr
 
 ## Vídeos da Home
 
-- Desktop de abertura: `public/assets/imgs-site/banner/banner3.mp4`
-- Mobile de abertura: `public/assets/imgs-site/banner/banner3-mobile.mp4`
+- Vídeo de abertura (desktop e mobile): `public/assets/imgs-site/banner/banner3.mp4`
+  - Caminhos alternativos aceitos pelo código: `public/assets/imgs-site/banner3.mp4` ou `public/banner3.mp4`
 - Banner desktop da Home: `public/assets/imgs-site/bannervideo.mp4`
 - Banner mobile da Home: `public/assets/imgs-site/banner/bannervideo-mobile.mp4`
 
@@ -49,4 +49,4 @@ Os caminhos do código já estão prontos. Em Next.js, coloque os arquivos dentr
 
 ## Observação sobre autoplay com som
 
-A Home está configurada para tentar iniciar o vídeo de abertura com áudio automaticamente toda vez que a rota Home é aberta. Alguns navegadores, principalmente Chrome e Safari, podem bloquear autoplay com áudio por política própria. O código mantém o vídeo reproduzindo e libera o áudio na primeira interação quando o navegador impõe esse bloqueio.
+A Home inicia o `banner3.mp4` automaticamente em modo compatível com autoplay e, logo após a reprodução começar, tenta liberar o áudio sem exibir botões. Ao fechar o vídeo, o código executa `pause()`, zera o volume e interrompe o áudio imediatamente. Observação: Chrome, Safari e outros navegadores podem bloquear áudio automático sem interação por uma política do próprio navegador; não existe código JavaScript capaz de obrigar o navegador a ignorar essa regra.

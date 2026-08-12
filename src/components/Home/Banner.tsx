@@ -1,16 +1,131 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-const INTRO_VIDEO_DESKTOP = "/assets/imgs-site/banner/banner3.mp4";
-const INTRO_VIDEO_MOBILE = "/assets/imgs-site/banner/banner3-mobile.mp4";
+// O mesmo banner3.mp4 é usado em desktop e mobile.
+// Mantemos caminhos alternativos para também funcionar caso o arquivo
+// tenha sido colocado diretamente em /assets/imgs-site ou em /public.
+const INTRO_VIDEO_PATHS = [
+  "/assets/imgs-site/banner/banner3.mp4",
+  "/assets/imgs-site/banner3.mp4",
+  "/banner3.mp4",
+];
+
 const BANNER_VIDEO_DESKTOP = "/assets/imgs-site/bannervideo.mp4";
 const BANNER_VIDEO_MOBILE = "/assets/imgs-site/banner/bannervideo-mobile.mp4";
 
 export default function Banner() {
   const [showIntroVideo, setShowIntroVideo] = useState(true);
-  const [soundBlocked, setSoundBlocked] = useState(false);
+  const [introVideoIndex, setIntroVideoIndex] = useState(0);
   const introVideoRef = useRef<HTMLVideoElement | null>(null);
+  const audioTimersRef = useRef<number[]>([]);
+
+  const limparTentativasDeAudio = useCallback(() => {
+    audioTimersRef.current.forEach((timer) => window.clearTimeout(timer));
+    audioTimersRef.current = [];
+  }, []);
+
+  const tentarLiberarSom = useCallback(() => {
+    const video = introVideoRef.current;
+    if (!video || !showIntroVideo) return;
+
+    // O vídeo começa mudo para o navegador não bloquear o autoplay.
+    // Assim que a reprodução já começou, tentamos liberar o áudio sem botão.
+    video.volume = 0;
+    video.defaultMuted = false;
+    video.muted = false;
+
+    const aumentarVolume = window.setTimeout(() => {
+      const atual = introVideoRef.current;
+      if (!atual || !showIntroVideo) return;
+
+      atual.muted = false;
+      atual.defaultMuted = false;
+      atual.volume = 1;
+
+      // Reforça a reprodução caso algum navegador pause ao retirar o mute.
+      const tentativa = atual.play();
+      if (tentativa) {
+        void tentativa.catch(() => {
+          // Se o navegador bloquear áudio automático, não deixamos o vídeo parar.
+          atual.defaultMuted = true;
+          atual.muted = true;
+          atual.volume = 1;
+          void atual.play().catch(() => undefined);
+        });
+      }
+    }, 120);
+
+    audioTimersRef.current.push(aumentarVolume);
+  }, [showIntroVideo]);
+
+  const iniciarIntro = useCallback(async () => {
+    const video = introVideoRef.current;
+    if (!video || !showIntroVideo) return;
+
+    limparTentativasDeAudio();
+
+    // Autoplay confiável: primeiro inicia mudo.
+    video.autoplay = true;
+    video.playsInline = true;
+    video.defaultMuted = true;
+    video.muted = true;
+    video.volume = 1;
+
+    try {
+      await video.play();
+    } catch {
+      // O onCanPlay/onLoadedData fará uma nova tentativa quando o arquivo estiver pronto.
+      return;
+    }
+
+    // Depois que o vídeo já está tocando, tenta habilitar o som automaticamente.
+    tentarLiberarSom();
+
+    // Alguns navegadores só aceitam a mudança alguns instantes depois.
+    [350, 900, 1800].forEach((delay) => {
+      const timer = window.setTimeout(() => {
+        const atual = introVideoRef.current;
+        if (!atual || !showIntroVideo || atual.ended) return;
+
+        atual.defaultMuted = false;
+        atual.muted = false;
+        atual.volume = 1;
+      }, delay);
+
+      audioTimersRef.current.push(timer);
+    });
+  }, [limparTentativasDeAudio, showIntroVideo, tentarLiberarSom]);
+
+  const fecharIntroVideo = useCallback(() => {
+    limparTentativasDeAudio();
+
+    const video = introVideoRef.current;
+    if (video) {
+      // Para vídeo e áudio imediatamente antes de remover o overlay.
+      video.pause();
+      video.muted = true;
+      video.defaultMuted = true;
+      video.volume = 0;
+
+      try {
+        video.currentTime = 0;
+      } catch {
+        // O pause acima já garante que nenhum áudio continue tocando.
+      }
+    }
+
+    setShowIntroVideo(false);
+  }, [limparTentativasDeAudio]);
+
+  const tentarProximoCaminho = useCallback(() => {
+    setIntroVideoIndex((indiceAtual) => {
+      if (indiceAtual >= INTRO_VIDEO_PATHS.length - 1) {
+        return indiceAtual;
+      }
+      return indiceAtual + 1;
+    });
+  }, []);
 
   useEffect(() => {
     if (!showIntroVideo) return;
@@ -18,81 +133,17 @@ export default function Banner() {
     const video = introVideoRef.current;
     if (!video) return;
 
-    let unlockListenersActive = false;
+    // Quando o caminho muda, força o carregamento do novo arquivo.
+    video.load();
+    void iniciarIntro();
 
-    const removeUnlockListeners = () => {
-      if (!unlockListenersActive) return;
-
-      document.removeEventListener("pointerdown", unlockSound, true);
-      document.removeEventListener("keydown", unlockSound, true);
-      document.removeEventListener("touchstart", unlockSound, true);
-      unlockListenersActive = false;
+    return () => {
+      limparTentativasDeAudio();
+      video.pause();
+      video.muted = true;
+      video.volume = 0;
     };
-
-    const playWithSound = async () => {
-      video.defaultMuted = false;
-      video.muted = false;
-      video.volume = 1;
-      await video.play();
-      setSoundBlocked(false);
-    };
-
-    const unlockSound = () => {
-      void playWithSound()
-        .then(removeUnlockListeners)
-        .catch(() => undefined);
-    };
-
-    const addUnlockListeners = () => {
-      if (unlockListenersActive) return;
-
-      document.addEventListener("pointerdown", unlockSound, true);
-      document.addEventListener("keydown", unlockSound, true);
-      document.addEventListener("touchstart", unlockSound, true);
-      unlockListenersActive = true;
-    };
-
-    const startIntroVideo = async () => {
-      try {
-        // A Home sempre tenta iniciar o vídeo de abertura já com áudio.
-        await playWithSound();
-      } catch {
-        // Chrome/Safari podem bloquear autoplay com som por política do navegador.
-        // Nesse caso o vídeo continua automaticamente e o som é liberado na
-        // primeira interação, sem interromper a abertura da Home.
-        video.defaultMuted = true;
-        video.muted = true;
-        setSoundBlocked(true);
-
-        try {
-          await video.play();
-        } catch {
-          // Caso até o autoplay mudo seja bloqueado, a primeira interação tenta novamente.
-        }
-
-        addUnlockListeners();
-      }
-    };
-
-    void startIntroVideo();
-
-    return removeUnlockListeners;
-  }, [showIntroVideo]);
-
-  async function ativarSom() {
-    const video = introVideoRef.current;
-    if (!video) return;
-
-    try {
-      video.defaultMuted = false;
-      video.muted = false;
-      video.volume = 1;
-      await video.play();
-      setSoundBlocked(false);
-    } catch {
-      // Mantém o fallback visível se o navegador continuar bloqueando o áudio.
-    }
-  }
+  }, [introVideoIndex, iniciarIntro, limparTentativasDeAudio, showIntroVideo]);
 
   return (
     <>
@@ -100,32 +151,27 @@ export default function Banner() {
         <div className="home-video-overlay">
           <video
             ref={introVideoRef}
+            key={INTRO_VIDEO_PATHS[introVideoIndex]}
             className="home-fullscreen-video"
+            src={INTRO_VIDEO_PATHS[introVideoIndex]}
             autoPlay
+            muted
             playsInline
             preload="auto"
-            onEnded={() => setShowIntroVideo(false)}
+            onLoadedData={() => void iniciarIntro()}
+            onCanPlay={() => void iniciarIntro()}
+            onPlaying={tentarLiberarSom}
+            onError={tentarProximoCaminho}
+            onEnded={fecharIntroVideo}
           >
-            <source media="(max-width: 900px)" src={INTRO_VIDEO_MOBILE} type="video/mp4" />
-            <source src={INTRO_VIDEO_DESKTOP} type="video/mp4" />
             Seu navegador não suporta vídeos HTML5.
           </video>
-
-          {soundBlocked && (
-            <button
-              type="button"
-              className="home-video-sound"
-              onClick={() => void ativarSom()}
-              aria-label="Ativar som do vídeo"
-            >
-              Ativar som
-            </button>
-          )}
 
           <button
             type="button"
             className="home-video-close"
-            onClick={() => setShowIntroVideo(false)}
+            onClick={fecharIntroVideo}
+            aria-label="Fechar vídeo de abertura"
           >
             Fechar
           </button>
