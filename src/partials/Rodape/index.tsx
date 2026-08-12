@@ -20,7 +20,7 @@ export default function Rodape() {
         <div className="logoFooter">
           <Link href="/" aria-label="Página inicial">
             <Image
-              src="/assets/imgs-site/toca-das-corujas-logo.png"
+              src="/assets/imgs-site/logo.webp"
               width={300}
               height={112}
               alt="Toca das Corujas Hotel Fazenda"

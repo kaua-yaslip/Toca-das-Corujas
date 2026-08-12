@@ -72,7 +72,7 @@ export default function Topo() {
           <div className="topo-logo">
             <Link href="/" aria-label="Página inicial">
               <Image
-                src="/assets/imgs-site/toca-das-corujas-logo.png"
+                src="/assets/imgs-site/logo.webp"
                 alt="Toca das Corujas"
                 width={220}
                 height={80}
@@ -120,7 +120,7 @@ export default function Topo() {
         <div className="topo-logo-mobile">
           <Link href="/" aria-label="Página inicial" onClick={fecharMenu}>
             <Image
-              src="/assets/imgs-site/toca-das-corujas-logo.png"
+              src="/assets/imgs-site/logo.webp"
               alt="Toca das Corujas"
               width={180}
               height={70}
