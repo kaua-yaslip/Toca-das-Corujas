@@ -6,6 +6,8 @@ const cards = [
   { imagem: "/assets/toca-das-corujas/foto-21.webp", titulo: "Cozinha", alt: "Cozinha da Toca das Corujas" },
 ];
 
+const CORUJAS_DESTAQUE = "/assets/imgs-site/corujas/coruja-mae-filhote.png";
+
 export default function Highlights() {
   return (
     <section className="second" aria-label="Destaques da Toca das Corujas">
@@ -15,7 +17,13 @@ export default function Highlights() {
             <article className="card" key={card.titulo}>
               <Image className="imagem-card" src={card.imagem} alt={card.alt} width={380} height={700} />
               <span>{card.titulo}</span>
-              <Image className="coruja" src="/assets/imgs-site/logo-icon.png" alt="" width={50} height={50} aria-hidden="true" />
+              <Image
+                className="coruja"
+                src={CORUJAS_DESTAQUE}
+                alt="Corujas da Toca das Corujas"
+                width={90}
+                height={120}
+              />
             </article>
           ))}
         </div>

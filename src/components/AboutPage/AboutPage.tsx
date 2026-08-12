@@ -13,6 +13,9 @@ import {
 } from "lucide-react";
 import styles from "./AboutPage.module.scss";
 
+const VIDEO_ORIGINAL = "/assets/imgs-site/videos/video-original-mulher.mp4";
+const VIDEO_ORIGINAL_POSTER = "/assets/imgs-site/sobre/video-original-poster.webp";
+
 const experiences = [
   {
     icon: BedDouble,
@@ -36,16 +39,24 @@ const experiences = [
   },
 ];
 
+// Mais fotos na página Sobre, como solicitado. As imagens finais podem ser
+// substituídas mantendo exatamente estes caminhos.
 const gallery = [
-  { src: "/card-backgrounds/hospedagem-exterior.webp", alt: "Área externa da Toca das Corujas", className: styles.galleryWide },
-  { src: "/card-backgrounds/piscina.webp", alt: "Piscina da Toca das Corujas", className: styles.galleryTall },
-  { src: "/card-backgrounds/eventos-salao.webp", alt: "Espaço interno para eventos", className: "" },
-  { src: "/card-backgrounds/cavalos-grupo.webp", alt: "Passeio com cavalos na propriedade", className: "" },
-  { src: "/card-backgrounds/varanda.webp", alt: "Varanda e área de convivência", className: styles.galleryTall },
-  { src: "/card-backgrounds/natureza.webp", alt: "Natureza e área verde do hotel fazenda", className: "" },
-  { src: "/card-backgrounds/acomodacoes.webp", alt: "Acomodações da Toca das Corujas", className: styles.galleryWide },
-  { src: "/card-backgrounds/gastronomia.webp", alt: "Gastronomia servida no espaço", className: "" },
-  { src: "/card-backgrounds/campo-quadra.webp", alt: "Campo e área esportiva", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-01.webp", alt: "Área externa da Toca das Corujas", className: styles.galleryWide },
+  { src: "/assets/imgs-site/sobre/galeria-02.webp", alt: "Piscina da Toca das Corujas", className: styles.galleryTall },
+  { src: "/assets/imgs-site/sobre/galeria-03.webp", alt: "Espaço interno para eventos", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-04.webp", alt: "Passeio com cavalos na propriedade", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-05.webp", alt: "Varanda e área de convivência", className: styles.galleryTall },
+  { src: "/assets/imgs-site/sobre/galeria-06.webp", alt: "Natureza e área verde do hotel fazenda", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-07.webp", alt: "Acomodações da Toca das Corujas", className: styles.galleryWide },
+  { src: "/assets/imgs-site/sobre/galeria-08.webp", alt: "Espaço de convivência da Toca das Corujas", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-09.webp", alt: "Campo e área esportiva", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-10.webp", alt: "Detalhes da estrutura do hotel fazenda", className: styles.galleryWide },
+  { src: "/assets/imgs-site/sobre/galeria-11.webp", alt: "Momento de lazer em família", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-12.webp", alt: "Paisagem da Toca das Corujas", className: styles.galleryTall },
+  { src: "/assets/imgs-site/sobre/galeria-13.webp", alt: "Área de descanso da Toca das Corujas", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-14.webp", alt: "Ambiente para hóspedes na Toca das Corujas", className: "" },
+  { src: "/assets/imgs-site/sobre/galeria-15.webp", alt: "Outro espaço da Toca das Corujas", className: styles.galleryWide },
 ];
 
 export default function AboutPage() {
@@ -79,7 +90,7 @@ export default function AboutPage() {
         <div className={styles.introImages}>
           <div className={styles.mainImage}>
             <Image
-              src="/card-backgrounds/hospedagem-exterior.webp"
+              src="/assets/imgs-site/sobre/sobre-destaque-01.webp"
               alt="Vista externa da Toca das Corujas"
               fill
               sizes="(max-width: 900px) 100vw, 52vw"
@@ -88,7 +99,7 @@ export default function AboutPage() {
           </div>
           <div className={styles.secondaryImage}>
             <Image
-              src="/card-backgrounds/acomodacoes.webp"
+              src="/assets/imgs-site/sobre/sobre-destaque-02.webp"
               alt="Ambiente interno e acolhedor da Toca das Corujas"
               fill
               sizes="(max-width: 900px) 48vw, 24vw"
@@ -120,6 +131,24 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className={styles.originalVideoSection} aria-labelledby="video-original-titulo">
+        <div className={styles.originalVideoText}>
+          <span className={styles.sectionTag}>Conheça de perto</span>
+          <h2 id="video-original-titulo">Um pouco da Toca das Corujas em vídeo</h2>
+          <p>
+            Este espaço foi reservado para o vídeo original, com a apresentação falada,
+            mantendo o registro mais próximo e pessoal da experiência no hotel fazenda.
+          </p>
+        </div>
+
+        <div className={styles.originalVideoFrame}>
+          <video controls playsInline preload="metadata" poster={VIDEO_ORIGINAL_POSTER}>
+            <source src={VIDEO_ORIGINAL} type="video/mp4" />
+            Seu navegador não suporta vídeos HTML5.
+          </video>
+        </div>
+      </section>
+
       <section className={styles.experienceSection}>
         <div className={styles.sectionHeading}>
           <div>
@@ -148,8 +177,8 @@ export default function AboutPage() {
       <section className={styles.highlightsSection}>
         <div className={styles.highlightsImage}>
           <Image
-            src="/card-backgrounds/pesca.webp"
-            alt="Momento de pesca na Toca das Corujas"
+            src="/assets/imgs-site/sobre/sobre-lazer-destaque.webp"
+            alt="Momento de lazer na Toca das Corujas"
             fill
             sizes="(max-width: 900px) 100vw, 45vw"
           />
@@ -193,11 +222,11 @@ export default function AboutPage() {
         <div className={styles.galleryHeading}>
           <div>
             <span className={styles.sectionTag}>Galeria de imagens</span>
-            <h2>Conheça alguns dos nossos espaços</h2>
+            <h2>Conheça mais espaços da Toca das Corujas</h2>
           </div>
           <p>
-            Um pequeno passeio visual por ambientes feitos para descansar, celebrar e
-            aproveitar o melhor do interior paulista.
+            Uma seleção maior de ambientes, paisagens e experiências para mostrar com
+            mais detalhes tudo o que faz parte do hotel fazenda.
           </p>
         </div>
 

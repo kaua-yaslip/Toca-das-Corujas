@@ -8,7 +8,10 @@ interface FotoCavalinho {
   numero: number;
   titulo: string;
   descricao: string;
+  video?: string;
 }
+
+const VIDEO_CAVALO_COM_MUSICA = "/assets/imgs-site/videos/cavalo-com-musica.mp4";
 
 const fotosDestaque: FotoCavalinho[] = [
   {
@@ -20,6 +23,7 @@ const fotosDestaque: FotoCavalinho[] = [
     numero: 11,
     titulo: "Diversão em família",
     descricao: "Uma experiência para todas as idades",
+    video: VIDEO_CAVALO_COM_MUSICA,
   },
   {
     numero: 3,
@@ -75,19 +79,31 @@ function FotoCard({
 }) {
   return (
     <figure
-      className={`cavalinho-foto-card${destaque ? " cavalinho-foto-card--destaque" : ""}`}
+      className={`cavalinho-foto-card${destaque ? " cavalinho-foto-card--destaque" : ""}${foto.video ? " cavalinho-foto-card--video" : ""}`}
     >
-      <Image
-        src={caminho(foto.numero)}
-        alt={`${foto.titulo} na Toca das Corujas`}
-        width={760}
-        height={760}
-        sizes={
-          destaque
-            ? "(max-width: 600px) 100vw, (max-width: 900px) 100vw, 62vw"
-            : "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 32vw"
-        }
-      />
+      {foto.video ? (
+        <video
+          src={foto.video}
+          controls
+          playsInline
+          preload="metadata"
+          aria-label={`${foto.titulo} na Toca das Corujas`}
+        >
+          Seu navegador não suporta vídeos HTML5.
+        </video>
+      ) : (
+        <Image
+          src={caminho(foto.numero)}
+          alt={`${foto.titulo} na Toca das Corujas`}
+          width={760}
+          height={760}
+          sizes={
+            destaque
+              ? "(max-width: 600px) 100vw, (max-width: 900px) 100vw, 62vw"
+              : "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 32vw"
+          }
+        />
+      )}
 
       <figcaption>
         <span>{String(indice + 1).padStart(2, "0")}</span>

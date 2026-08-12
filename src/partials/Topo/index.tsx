@@ -34,12 +34,18 @@ export default function Topo() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [lazerAberto, setLazerAberto] = useState(false);
   const [suitesAberto, setSuitesAberto] = useState(false);
+  const [dropdownDesktopBloqueado, setDropdownDesktopBloqueado] = useState<"lazer" | "suites" | null>(null);
   const [rolado, setRolado] = useState(false);
 
   function fecharMenu() {
     setMenuAberto(false);
     setLazerAberto(false);
     setSuitesAberto(false);
+  }
+
+  function fecharDropdownDesktop(tipo: "lazer" | "suites") {
+    // Impede que :hover/:focus-within mantenha o submenu visível depois do clique.
+    setDropdownDesktopBloqueado(tipo);
   }
 
   useEffect(() => {
@@ -87,24 +93,46 @@ export default function Topo() {
               <li><Link href="/" className={`nav-link ${rotaAtiva("/") ? "ativo" : ""}`}>HOME</Link></li>
               <li><Link href="/sobre" className={`nav-link ${rotaAtiva("/sobre") ? "ativo" : ""}`}>SOBRE</Link></li>
 
-              <li className="dropdown">
-                <Link href="/lazer" className={`nav-link dropdown-link ${rotaAtiva("/lazer") ? "ativo" : ""}`}>
+              <li
+                className={`dropdown ${dropdownDesktopBloqueado === "lazer" ? "dropdown-bloqueado" : ""}`}
+                onMouseLeave={() => setDropdownDesktopBloqueado(null)}
+              >
+                <Link
+                  href="/lazer"
+                  className={`nav-link dropdown-link ${rotaAtiva("/lazer") ? "ativo" : ""}`}
+                  onClick={() => fecharDropdownDesktop("lazer")}
+                >
                   LAZER <FaCaretDown aria-hidden="true" />
                 </Link>
                 <ul className="dropdown-list">
                   {linksLazer.map(([href, label]) => (
-                    <li key={href}><Link href={href}>{label}</Link></li>
+                    <li key={href}>
+                      <Link href={href} onClick={() => fecharDropdownDesktop("lazer")}>
+                        {label}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
               </li>
 
-              <li className="dropdown">
-                <Link href="/suites" className={`nav-link dropdown-link ${rotaAtiva("/suites") ? "ativo" : ""}`}>
+              <li
+                className={`dropdown ${dropdownDesktopBloqueado === "suites" ? "dropdown-bloqueado" : ""}`}
+                onMouseLeave={() => setDropdownDesktopBloqueado(null)}
+              >
+                <Link
+                  href="/suites"
+                  className={`nav-link dropdown-link ${rotaAtiva("/suites") ? "ativo" : ""}`}
+                  onClick={() => fecharDropdownDesktop("suites")}
+                >
                   SUÍTES <FaCaretDown aria-hidden="true" />
                 </Link>
                 <ul className="dropdown-list">
                   {linksSuites.map(([href, label]) => (
-                    <li key={href}><Link href={href}>{label}</Link></li>
+                    <li key={href}>
+                      <Link href={href} onClick={() => fecharDropdownDesktop("suites")}>
+                        {label}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
               </li>

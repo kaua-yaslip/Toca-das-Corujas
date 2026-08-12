@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function Banner() {
-  const [showIntroVideo, setShowIntroVideo] = useState(false);
-  const introVideoRef = useRef<HTMLVideoElement | null>(null);
+const INTRO_VIDEO_DESKTOP = "/assets/imgs-site/banner/banner3.mp4";
+const INTRO_VIDEO_MOBILE = "/assets/imgs-site/banner/banner3-mobile.mp4";
+const BANNER_VIDEO_DESKTOP = "/assets/imgs-site/bannervideo.mp4";
+const BANNER_VIDEO_MOBILE = "/assets/imgs-site/banner/bannervideo-mobile.mp4";
 
-  useEffect(() => {
-    // Exibe o vídeo de abertura tanto no desktop quanto no mobile.
-    setShowIntroVideo(true);
-  }, []);
+export default function Banner() {
+  const [showIntroVideo, setShowIntroVideo] = useState(true);
+  const [soundBlocked, setSoundBlocked] = useState(false);
+  const introVideoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     if (!showIntroVideo) return;
@@ -23,25 +24,22 @@ export default function Banner() {
       if (!unlockListenersActive) return;
 
       document.removeEventListener("pointerdown", unlockSound, true);
-      document.removeEventListener("click", unlockSound, false);
       document.removeEventListener("keydown", unlockSound, true);
       document.removeEventListener("touchstart", unlockSound, true);
       unlockListenersActive = false;
     };
 
-    const enableSound = async () => {
-      // O banner3 deve tocar com áudio. Primeiro tentamos iniciar já com som.
+    const playWithSound = async () => {
       video.defaultMuted = false;
       video.muted = false;
       video.volume = 1;
       await video.play();
+      setSoundBlocked(false);
     };
 
     const unlockSound = () => {
-      void enableSound()
-        .then(() => {
-          removeUnlockListeners();
-        })
+      void playWithSound()
+        .then(removeUnlockListeners)
         .catch(() => undefined);
     };
 
@@ -49,7 +47,6 @@ export default function Banner() {
       if (unlockListenersActive) return;
 
       document.addEventListener("pointerdown", unlockSound, true);
-      document.addEventListener("click", unlockSound, true);
       document.addEventListener("keydown", unlockSound, true);
       document.addEventListener("touchstart", unlockSound, true);
       unlockListenersActive = true;
@@ -57,17 +54,20 @@ export default function Banner() {
 
     const startIntroVideo = async () => {
       try {
-        await enableSound();
+        // A Home sempre tenta iniciar o vídeo de abertura já com áudio.
+        await playWithSound();
       } catch {
-        // Navegadores podem bloquear autoplay com áudio até a primeira interação.
-        // Mantemos o vídeo rodando e ativamos o som assim que o usuário interagir.
+        // Chrome/Safari podem bloquear autoplay com som por política do navegador.
+        // Nesse caso o vídeo continua automaticamente e o som é liberado na
+        // primeira interação, sem interromper a abertura da Home.
         video.defaultMuted = true;
         video.muted = true;
+        setSoundBlocked(true);
 
         try {
           await video.play();
         } catch {
-          // A primeira interação também tentará iniciar a reprodução.
+          // Caso até o autoplay mudo seja bloqueado, a primeira interação tenta novamente.
         }
 
         addUnlockListeners();
@@ -76,10 +76,23 @@ export default function Banner() {
 
     void startIntroVideo();
 
-    return () => {
-      removeUnlockListeners();
-    };
+    return removeUnlockListeners;
   }, [showIntroVideo]);
+
+  async function ativarSom() {
+    const video = introVideoRef.current;
+    if (!video) return;
+
+    try {
+      video.defaultMuted = false;
+      video.muted = false;
+      video.volume = 1;
+      await video.play();
+      setSoundBlocked(false);
+    } catch {
+      // Mantém o fallback visível se o navegador continuar bloqueando o áudio.
+    }
+  }
 
   return (
     <>
@@ -88,14 +101,26 @@ export default function Banner() {
           <video
             ref={introVideoRef}
             className="home-fullscreen-video"
-            src="/assets/imgs-site/banner/banner3.mp4"
             autoPlay
             playsInline
             preload="auto"
             onEnded={() => setShowIntroVideo(false)}
           >
+            <source media="(max-width: 900px)" src={INTRO_VIDEO_MOBILE} type="video/mp4" />
+            <source src={INTRO_VIDEO_DESKTOP} type="video/mp4" />
             Seu navegador não suporta vídeos HTML5.
           </video>
+
+          {soundBlocked && (
+            <button
+              type="button"
+              className="home-video-sound"
+              onClick={() => void ativarSom()}
+              aria-label="Ativar som do vídeo"
+            >
+              Ativar som
+            </button>
+          )}
 
           <button
             type="button"
@@ -111,13 +136,14 @@ export default function Banner() {
         <div className="banner-1 banner-css">
           <video
             className="video-banner"
-            src="/assets/imgs-site/bannervideo.mp4"
             autoPlay
             loop
             muted
             playsInline
             preload="metadata"
           >
+            <source media="(max-width: 900px)" src={BANNER_VIDEO_MOBILE} type="video/mp4" />
+            <source src={BANNER_VIDEO_DESKTOP} type="video/mp4" />
             Seu navegador não suporta vídeos HTML5.
           </video>
         </div>

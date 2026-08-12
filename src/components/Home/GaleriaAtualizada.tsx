@@ -1,29 +1,39 @@
 import Image from "next/image";
 
+// A galeria foi preparada para misturar entrada, estrutura, lazer, suítes e natureza.
+// Basta colocar as imagens finais exatamente nos caminhos abaixo.
 const fotos = [
   {
-    src: "/assets/imgs-site/entrada-toca/EntradaToca1.jpeg",
-    alt: "Entrada da Toca das Corujas com jardim e portal de madeira",
+    src: "/assets/imgs-site/galeria-geral/entrada-01.webp",
+    alt: "Entrada da Toca das Corujas",
   },
   {
-    src: "/assets/imgs-site/entrada-toca/EntradaToca2.jpeg",
-    alt: "Vista ampla da entrada da Toca das Corujas",
+    src: "/assets/imgs-site/galeria-geral/estrutura-01.webp",
+    alt: "Estrutura e área de convivência da Toca das Corujas",
   },
   {
-    src: "/assets/imgs-site/entrada-toca/EntradaToca4.jpeg",
-    alt: "Portal de entrada da Toca das Corujas em dia ensolarado",
+    src: "/assets/imgs-site/galeria-geral/lazer-01.webp",
+    alt: "Área de lazer da Toca das Corujas",
   },
   {
-    src: "/assets/imgs-site/entrada-toca/EntradaToca6.jpeg",
-    alt: "Entrada da Toca das Corujas vista pela área externa",
+    src: "/assets/imgs-site/galeria-geral/suite-01.webp",
+    alt: "Suíte da Toca das Corujas",
   },
   {
-    src: "/assets/imgs-site/entrada-toca/EntradaToca3.jpeg",
-    alt: "Detalhe da placa Toca das Corujas no portal de entrada",
+    src: "/assets/imgs-site/galeria-geral/natureza-01.webp",
+    alt: "Natureza ao redor da Toca das Corujas",
   },
   {
-    src: "/assets/imgs-site/entrada-toca/EntradaToca5.jpeg",
-    alt: "Portão principal da Toca das Corujas",
+    src: "/assets/imgs-site/galeria-geral/entrada-02.webp",
+    alt: "Outro registro da entrada da Toca das Corujas",
+  },
+  {
+    src: "/assets/imgs-site/galeria-geral/cavalos-01.webp",
+    alt: "Cavalos e experiências no campo na Toca das Corujas",
+  },
+  {
+    src: "/assets/imgs-site/galeria-geral/piscina-01.webp",
+    alt: "Piscina da Toca das Corujas",
   },
 ];
 
@@ -34,8 +44,8 @@ export default function GaleriaAtualizada() {
         <span>Novos registros</span>
         <h2 id="galeria-atualizada-titulo">Conheça cada espaço da Toca das Corujas</h2>
         <p>
-          Veja alguns registros da entrada e dos primeiros detalhes que recebem
-          você na Toca das Corujas antes mesmo de começar a sua estadia.
+          A galeria reúne entrada, acomodações, áreas de convivência, lazer e momentos
+          em contato com a natureza para você conhecer melhor cada detalhe da sua visita.
         </p>
       </div>
 
