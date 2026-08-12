@@ -1,48 +1,70 @@
 import Image from "next/image";
 
-const imagens = [
+const suites = [
   {
-    src: "/assets/toca-das-corujas/foto-48.webp",
-    alt: "Lago e área de lazer da Toca das Corujas",
+    nome: "Suíte Standard",
+    descricao:
+      "A opção mais simples e aconchegante, com quarto revestido em azulejos, uma cama de casal e uma beliche.",
+    src: "/assets/imgs-site/suites/ImagensSuites1.jpeg",
+    alt: "Suíte Standard da Toca das Corujas com quarto revestido em azulejos",
   },
   {
-    src: "/assets/toca-das-corujas/foto-08.webp",
-    alt: "Experiência de lazer na Toca das Corujas",
+    nome: "Suíte Luxo",
+    descricao:
+      "Uma suíte com visual renovado e varanda, ideal para quem procura mais conforto sem perder o clima acolhedor do hotel fazenda.",
+    src: "/assets/imgs-site/suites/ImagensSuites7.jpeg",
+    alt: "Suíte Luxo renovada da Toca das Corujas com acesso à varanda",
   },
   {
-    src: "/assets/toca-das-corujas/foto-12.webp",
-    alt: "Vista da represa próxima à Toca das Corujas",
+    nome: "Suíte Master",
+    descricao:
+      "Nossa categoria mais completa, indicada para quem deseja uma estadia com mais comodidades e suítes com banheira.",
+    src: "/assets/imgs-site/suites/ImagensSuites4.jpeg",
+    alt: "Banheiro da Suíte Master da Toca das Corujas",
   },
 ];
 
 export default function SuitesHome() {
   return (
-    <section className="suites">
-      <div className="suites-overlay" />
+    <section className="suites" aria-labelledby="suites-home-titulo">
+      <div className="suites-overlay" aria-hidden="true" />
 
       <div className="suites-conteudo">
         <div className="texto-suites">
-          <span>Suítes para todos os gostos</span>
+          <span>3 tipos de suíte</span>
 
-          <h2>
-            Nossas Suítes de Luxo na Toca das Corujas são o ápice do conforto e
-            elegância, oferecendo um santuário tranquilo para os nossos hóspedes.
+          <h2 id="suites-home-titulo">
+            Standard, Luxo e Master para diferentes estilos de hospedagem.
           </h2>
+
+          <p>
+            Escolha a acomodação que combina melhor com a sua estadia na Toca
+            das Corujas, desde uma opção mais simples até suítes com mais
+            conforto e comodidades.
+          </p>
         </div>
 
         <div className="comidas-suites">
-          {imagens.map((imagem, index) => (
-            <div
-              className={`suites-imagem suites-imagem-${index + 1}`}
-              key={imagem.src}
-            >
-              <Image
-                src={imagem.src}
-                alt={imagem.alt}
-                width={700}
-                height={900}
-              />
-            </div>
+          {suites.map((suite, index) => (
+            <article className="suites-item" key={suite.nome}>
+              <div className="suites-imagem">
+                <Image
+                  src={suite.src}
+                  alt={suite.alt}
+                  width={1280}
+                  height={960}
+                  sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                />
+                <span className="suites-numero" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+
+              <div className="suites-informacoes">
+                <h3>{suite.nome}</h3>
+                <p>{suite.descricao}</p>
+              </div>
+            </article>
           ))}
         </div>
       </div>
