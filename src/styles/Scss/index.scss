@@ -5568,3 +5568,10 @@ canvas {
     background: #120807;
   }
 }
+
+/* Página de suítes: a seção que antes ficava na Home agora vive somente em /suites. */
+.pagina-suites-atualizada {
+  .suites-item {
+    scroll-margin-top: 120px;
+  }
+}

@@ -4,7 +4,6 @@ import First from "@/components/Home/First";
 import Highlights from "@/components/Home/Highlights";
 import Passeios from "@/components/Home/Passeios";
 import RecintoGeral from "@/components/Home/RecintoGeral";
-import SuitesHome from "@/components/Home/SuitesHome";
 import HotelFazenda from "@/components/Home/HotelFazenda";
 import Cavalinho from "@/components/Home/Cavalinho";
 import Form from "@/components/Home/Form";
@@ -24,7 +23,6 @@ export default function HomePage() {
       <Highlights />
       <Passeios />
       <RecintoGeral />
-      <SuitesHome />
       <HotelFazenda />
       <Cavalinho />
       <GaleriaAtualizada />
