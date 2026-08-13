@@ -14,11 +14,13 @@ export const metadata: Metadata = {
   description: "Toca das Corujas, hotel fazenda em Angatuba, São Paulo.",
   icons: {
     icon: [
-      { url: "/favicon.ico", type: "image/x-icon" },
-      { url: "/assets/imgs-site/logo-icon.png", type: "image/png" },
+      {
+        url: "/assets/imgs-site/logo-icon.png",
+        type: "image/png",
+      },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
+    shortcut: "/assets/imgs-site/logo-icon.png",
+    apple: "/assets/imgs-site/logo-icon.png",
   },
 };
 

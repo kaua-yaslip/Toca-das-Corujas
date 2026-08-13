@@ -23,9 +23,10 @@ const linksLazer = [
 ] as const;
 
 const linksSuites = [
-  ["/suites#suites-standard", "Suíte Standard"],
-  ["/suites#suites-luxo", "Suíte Luxo"],
-  ["/suites#suites-master", "Suíte Master"],
+  ["/suites#suites-luxo", "Suítes Luxo"],
+  ["/suites#suites-master-sem-banheiras", "Suítes Master sem Banheiras"],
+  ["/suites#suites-master-com-banheiras", "Suítes Master com Banheiras"],
+  ["/suites#suites-simples", "Suítes Simples"],
 ] as const;
 
 export default function Topo() {
@@ -162,8 +163,8 @@ export default function Topo() {
             <Image
               src="/assets/imgs-site/logo.webp"
               alt="Toca das Corujas"
-              width={180}
-              height={70}
+              width={245}
+              height={96}
               priority
             />
           </Link>
