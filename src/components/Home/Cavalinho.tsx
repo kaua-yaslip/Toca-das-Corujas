@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 import { FaArrowDown, FaPlay } from "react-icons/fa6";
 
 interface FotoCavalinho {
@@ -68,58 +67,13 @@ const caminho = (numero: number) => fotosCavalos[numero];
 
 
 function VideoPocoto({ src, ariaLabel }: { src: string; ariaLabel: string }) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const iniciar = async () => {
-      video.volume = 1;
-      video.muted = false;
-
-      try {
-        await video.play();
-      } catch {
-        // Fallback necessário para navegadores que bloqueiam autoplay com áudio.
-        video.muted = true;
-        await video.play().catch(() => undefined);
-      }
-    };
-
-    const liberarSom = () => {
-      const atual = videoRef.current;
-      if (!atual) return;
-
-      atual.muted = false;
-      atual.volume = 1;
-      void atual.play().catch(() => undefined);
-      removerEventos();
-    };
-
-    const removerEventos = () => {
-      window.removeEventListener("pointerdown", liberarSom);
-      window.removeEventListener("touchstart", liberarSom);
-      window.removeEventListener("keydown", liberarSom);
-    };
-
-    void iniciar();
-    window.addEventListener("pointerdown", liberarSom, { passive: true });
-    window.addEventListener("touchstart", liberarSom, { passive: true });
-    window.addEventListener("keydown", liberarSom);
-
-    return removerEventos;
-  }, []);
-
   return (
     <video
-      ref={videoRef}
       src={src}
-      autoPlay
-      loop
       controls
       playsInline
       preload="metadata"
+      poster={caminho(11)}
       aria-label={ariaLabel}
     >
       Seu navegador não suporta vídeos HTML5.
@@ -133,11 +87,11 @@ const galeriaUrl =
 function FotoCard({
   foto,
   destaque = false,
-  indice,
+  numeroVisual,
 }: {
   foto: FotoCavalinho;
   destaque?: boolean;
-  indice: number;
+  numeroVisual?: number;
 }) {
   return (
     <figure
@@ -162,13 +116,15 @@ function FotoCard({
         />
       )}
 
-      <figcaption>
-        <span>{String(indice + 1).padStart(2, "0")}</span>
-        <div>
-          <strong>{foto.titulo}</strong>
-          <small>{foto.descricao}</small>
-        </div>
-      </figcaption>
+      {!foto.video && numeroVisual !== undefined && (
+        <figcaption>
+          <span>{String(numeroVisual).padStart(2, "0")}</span>
+          <div>
+            <strong>{foto.titulo}</strong>
+            <small>{foto.descricao}</small>
+          </div>
+        </figcaption>
+      )}
     </figure>
   );
 }
@@ -225,7 +181,13 @@ export default function Cavalinho() {
           <FotoCard
             key={foto.numero}
             foto={foto}
-            indice={indice}
+            numeroVisual={
+              foto.video
+                ? undefined
+                : fotosDestaque
+                    .slice(0, indice + 1)
+                    .filter((item) => !item.video).length
+            }
             destaque={indice === 0}
           />
         ))}
@@ -264,7 +226,7 @@ export default function Cavalinho() {
                 <FotoCard
                   key={foto.numero}
                   foto={foto}
-                  indice={indice + fotosDestaque.length}
+                  numeroVisual={indice + 3}
                 />
               ))}
             </div>

@@ -161,8 +161,7 @@ header {
     .dropdown {
       position: relative;
 
-      &:hover,
-      &:focus-within {
+      &.dropdown-aberto {
         .dropdown-list {
           opacity: 1;
           visibility: visible;
@@ -653,18 +652,5 @@ header {
     transform: translateX(24px);
   }
 }
-/* Ao clicar em LAZER ou SUÍTES no desktop, fecha o submenu imediatamente.
-   A classe só é removida quando o cursor sai do item, evitando a reabertura
-   causada por :hover ou :focus-within após a navegação. */
-@media (min-width: 901px) {
-  header .menu-desktop .dropdown.dropdown-bloqueado {
-    .dropdown-list,
-    &:hover .dropdown-list,
-    &:focus-within .dropdown-list {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      transform: translate(-50%, 10px) !important;
-      pointer-events: none !important;
-    }
-  }
-}
+/* No desktop, os submenus de Lazer e Suítes são controlados pelo React.
+   Ao sair com o mouse do item (inclusive do submenu), ele fecha imediatamente. */

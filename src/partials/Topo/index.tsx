@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { type FocusEvent, useEffect, useState } from "react";
 import { FaCaretDown, FaMinus, FaPlus } from "react-icons/fa6";
 import "@/partials/Topo/topo.scss";
 
@@ -34,7 +34,7 @@ export default function Topo() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [lazerAberto, setLazerAberto] = useState(false);
   const [suitesAberto, setSuitesAberto] = useState(false);
-  const [dropdownDesktopBloqueado, setDropdownDesktopBloqueado] = useState<"lazer" | "suites" | null>(null);
+  const [dropdownDesktopAberto, setDropdownDesktopAberto] = useState<"lazer" | "suites" | null>(null);
   const [rolado, setRolado] = useState(false);
 
   function fecharMenu() {
@@ -43,9 +43,16 @@ export default function Topo() {
     setSuitesAberto(false);
   }
 
-  function fecharDropdownDesktop(tipo: "lazer" | "suites") {
-    // Impede que :hover/:focus-within mantenha o submenu visível depois do clique.
-    setDropdownDesktopBloqueado(tipo);
+  function fecharDropdownDesktop() {
+    setDropdownDesktopAberto(null);
+  }
+
+  function controlarBlurDropdown(event: FocusEvent<HTMLLIElement>) {
+    const proximoElemento = event.relatedTarget as Node | null;
+
+    if (!proximoElemento || !event.currentTarget.contains(proximoElemento)) {
+      setDropdownDesktopAberto(null);
+    }
   }
 
   useEffect(() => {
@@ -94,20 +101,23 @@ export default function Topo() {
               <li><Link href="/sobre" className={`nav-link ${rotaAtiva("/sobre") ? "ativo" : ""}`}>SOBRE</Link></li>
 
               <li
-                className={`dropdown ${dropdownDesktopBloqueado === "lazer" ? "dropdown-bloqueado" : ""}`}
-                onMouseLeave={() => setDropdownDesktopBloqueado(null)}
+                className={`dropdown ${dropdownDesktopAberto === "lazer" ? "dropdown-aberto" : ""}`}
+                onMouseEnter={() => setDropdownDesktopAberto("lazer")}
+                onMouseLeave={fecharDropdownDesktop}
+                onFocusCapture={() => setDropdownDesktopAberto("lazer")}
+                onBlurCapture={controlarBlurDropdown}
               >
                 <Link
                   href="/lazer"
                   className={`nav-link dropdown-link ${rotaAtiva("/lazer") ? "ativo" : ""}`}
-                  onClick={() => fecharDropdownDesktop("lazer")}
+                  onClick={fecharDropdownDesktop}
                 >
                   LAZER <FaCaretDown aria-hidden="true" />
                 </Link>
                 <ul className="dropdown-list">
                   {linksLazer.map(([href, label]) => (
                     <li key={href}>
-                      <Link href={href} onClick={() => fecharDropdownDesktop("lazer")}>
+                      <Link href={href} onClick={fecharDropdownDesktop}>
                         {label}
                       </Link>
                     </li>
@@ -116,20 +126,23 @@ export default function Topo() {
               </li>
 
               <li
-                className={`dropdown ${dropdownDesktopBloqueado === "suites" ? "dropdown-bloqueado" : ""}`}
-                onMouseLeave={() => setDropdownDesktopBloqueado(null)}
+                className={`dropdown ${dropdownDesktopAberto === "suites" ? "dropdown-aberto" : ""}`}
+                onMouseEnter={() => setDropdownDesktopAberto("suites")}
+                onMouseLeave={fecharDropdownDesktop}
+                onFocusCapture={() => setDropdownDesktopAberto("suites")}
+                onBlurCapture={controlarBlurDropdown}
               >
                 <Link
                   href="/suites"
                   className={`nav-link dropdown-link ${rotaAtiva("/suites") ? "ativo" : ""}`}
-                  onClick={() => fecharDropdownDesktop("suites")}
+                  onClick={fecharDropdownDesktop}
                 >
                   SUÍTES <FaCaretDown aria-hidden="true" />
                 </Link>
                 <ul className="dropdown-list">
                   {linksSuites.map(([href, label]) => (
                     <li key={href}>
-                      <Link href={href} onClick={() => fecharDropdownDesktop("suites")}>
+                      <Link href={href} onClick={fecharDropdownDesktop}>
                         {label}
                       </Link>
                     </li>

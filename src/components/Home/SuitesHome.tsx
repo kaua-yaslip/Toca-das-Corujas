@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 type Suite = {
+  id: string;
   nome: string;
   descricao: string;
   fotos: { src: string; alt: string }[];
@@ -8,6 +9,7 @@ type Suite = {
 
 const suites: Suite[] = [
   {
+    id: "suites-standard",
     nome: "Suíte Standard",
     descricao:
       "Uma opção acolhedora e prática, com cama de casal, ambiente confortável e detalhes pensados para uma estadia tranquila. Agora a suíte aparece com vários ângulos para mostrar melhor o quarto, a varanda e o banheiro.",
@@ -20,6 +22,7 @@ const suites: Suite[] = [
     ],
   },
   {
+    id: "suites-luxo",
     nome: "Suíte Luxo",
     descricao:
       "Uma acomodação renovada para quem procura mais conforto, com ambientes bem cuidados e uma apresentação mais completa de cada detalhe da suíte.",
@@ -32,6 +35,7 @@ const suites: Suite[] = [
     ],
   },
   {
+    id: "suites-master",
     nome: "Suíte Master",
     descricao:
       "A categoria mais completa para quem deseja mais comodidade durante a hospedagem. A galeria reúne diferentes ângulos do quarto e dos espaços da suíte.",
@@ -66,7 +70,7 @@ export default function SuitesHome() {
 
         <div className="comidas-suites">
           {suites.map((suite, index) => (
-            <article className="suites-item" key={suite.nome}>
+            <article className="suites-item" id={suite.id} key={suite.nome}>
               <div className="suites-informacoes">
                 <span className="suites-numero" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
