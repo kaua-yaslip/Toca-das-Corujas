@@ -22,12 +22,12 @@ const linksLazer = [
   ["/charretes-troles-e-bigas-romana", "Passeios de Charretes, Tróles e Bigas Romanas"],
 ] as const;
 
-const linksSuites = [
-  ["/suites#suites-luxo", "Suítes Luxo"],
-  ["/suites#suites-master-sem-banheiras", "Suítes Master sem Banheiras"],
-  ["/suites#suites-master-com-banheiras", "Suítes Master com Banheiras"],
-  ["/suites#suites-simples", "Suítes Simples"],
-] as const;
+// const linksSuites = [
+//   ["/suites#suites-luxo", "Suítes Luxo"],
+//   ["/suites#suites-master-sem-banheiras", "Suítes Master sem Banheiras"],
+//   ["/suites#suites-master-com-banheiras", "Suítes Master com Banheiras"],
+//   ["/suites#suites-simples", "Suítes Simples"],
+// ] as const;
 
 export default function Topo() {
   const pathname = usePathname();
@@ -137,9 +137,10 @@ export default function Topo() {
                   className={`nav-link dropdown-link ${rotaAtiva("/suites") ? "ativo" : ""}`}
                   onClick={fecharDropdownDesktop}
                 >
-                  SUÍTES <FaCaretDown aria-hidden="true" />
+                  SUÍTES 
+                  {/* <FaCaretDown aria-hidden="true" /> */}
                 </Link>
-                <ul className="dropdown-list">
+                {/* <ul className="dropdown-list">
                   {linksSuites.map(([href, label]) => (
                     <li key={href}>
                       <Link href={href} onClick={fecharDropdownDesktop}>
@@ -147,7 +148,7 @@ export default function Topo() {
                       </Link>
                     </li>
                   ))}
-                </ul>
+                </ul> */}
               </li>
 
               <li><Link href="/contato" className={`nav-link ${rotaAtiva("/contato") ? "ativo" : ""}`}>CONTATO</Link></li>
@@ -217,11 +218,11 @@ export default function Topo() {
                   {suitesAberto ? <FaMinus /> : <FaPlus />}
                 </button>
               </div>
-              <ul className={`dropdown-list-mobile ${suitesAberto ? "ativo" : ""}`}>
+              {/* <ul className={`dropdown-list-mobile ${suitesAberto ? "ativo" : ""}`}>
                 {linksSuites.map(([href, label]) => (
                   <li key={href}><Link href={href} onClick={fecharMenu}>{label}</Link></li>
                 ))}
-              </ul>
+              </ul> */}
             </li>
 
             <li><Link href="/contato" className={`nav-link ${rotaAtiva("/contato") ? "ativo" : ""}`} onClick={fecharMenu}>CONTATO</Link></li>
