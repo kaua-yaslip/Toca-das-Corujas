@@ -29,17 +29,19 @@ export const settings: SiteSettings = {
   email: "marcos@yaslip.com.br",
   emailDestinatario: "marcos@yaslip.com.br",
   endereco: {
-    urlMaps: "https://www.google.com/maps/search/?api=1&query=-23.490212,-48.414266",
-    // O PHP enviado contém um endereço-modelo ("Rua base").
-    // Mantemos aqui a localização específica que já constava na página de contato.
+    // Localização oficial enviada para a Toca das Corujas.
+    urlMaps:
+      "https://www.google.com/maps?cid=15877795217209804611&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF&hl=pt-BR&gl=BR&source=embed",
     rua: "Rodovia Raposo Tavares",
     numero: "KM 205",
     bairro: "",
     cidade: "Angatuba",
     estado: "SP",
     cep: "",
+    // URL própria para iframe. O parâmetro output=embed evita o bloqueio
+    // que ocorre ao tentar carregar a página normal do Google Maps em um iframe.
     mapaEmbed:
-      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8619.425290861653!2d-48.41790158760671!3d-23.493660122372894!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c41fe847e94c4b%3A0xdc5942a03a2fc743!2sR.%20Esp%C3%ADrito%20Santo%20-%20Angatuba%2C%20SP%2C%2018240-000!5e0!3m2!1spt-BR!2sbr!4v1763056418263!5m2!1spt-BR!2sbr",
+      "https://maps.google.com/maps?cid=15877795217209804611&z=15&output=embed",
   },
   openGraph: {
     url,

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import {
   FaClock,
@@ -26,7 +25,7 @@ export const metadata: Metadata = pageData
 export default function Page() {
   const { siteName, ddd, numeroTelefone, numeroWhatsapp, whatsappApi, email } =
     settings;
-  const { rua, numero, bairro, cidade, estado, cep, urlMaps } =
+  const { rua, numero, bairro, cidade, estado, cep, urlMaps, mapaEmbed } =
     settings.endereco;
 
   const phoneDigits = `${ddd}${numeroTelefone}`.replace(/\D/g, "");
@@ -140,23 +139,23 @@ export default function Page() {
           </div>
 
           <div className="contato-mapa">
+            <iframe
+              className="contato-mapa-iframe"
+              src={mapaEmbed}
+              title={`Localização da ${siteName} no Google Maps`}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+
             <Link
               href={urlMaps}
               target="_blank"
               rel="noopener noreferrer"
-              className="contato-mapa-imagem-link"
-              aria-label={`Abrir a localização da ${siteName} no mapa`}
+              className="contato-mapa-abrir"
+              aria-label={`Abrir a localização da ${siteName} no Google Maps`}
             >
-              <div className="contato-mapa-papel">
-                <span className="contato-mapa-etiqueta">Mapa feito à mão</span>
-                <Image
-                  src="/assets/imgs-site/contato/mapa-feito-a-mao.webp"
-                  alt={`Mapa feito à mão para chegar à ${siteName}`}
-                  fill
-                  sizes="(max-width: 980px) 100vw, 50vw"
-                  className="contato-mapa-imagem"
-                />
-              </div>
+              Abrir no Google Maps
             </Link>
 
             <div className="contato-mapa-legenda">
