@@ -163,8 +163,8 @@ export default function Topo() {
             <Image
               src="/assets/imgs-site/logo.webp"
               alt="Toca das Corujas"
-              width={245}
-              height={96}
+              width={180}
+              height={70}
               priority
             />
           </Link>

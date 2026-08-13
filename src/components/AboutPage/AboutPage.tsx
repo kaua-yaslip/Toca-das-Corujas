@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import styles from "./AboutPage.module.scss";
 
-const VIDEO_ORIGINAL = "/assets/imgs-site/videos/video-original-mulher.mp4";
 const VIDEO_ORIGINAL_POSTER = "/assets/imgs-site/sobre/video-original-poster.webp";
 
 const experiences = [
@@ -131,21 +130,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className={styles.originalVideoSection} aria-labelledby="video-original-titulo">
+      <section className={styles.originalVideoSection} aria-labelledby="registro-especial-titulo">
         <div className={styles.originalVideoText}>
           <span className={styles.sectionTag}>Conheça de perto</span>
-          <h2 id="video-original-titulo">Um pouco da Toca das Corujas em vídeo</h2>
+          <h2 id="registro-especial-titulo">Um registro especial da Toca das Corujas</h2>
           <p>
-            Este espaço foi reservado para o vídeo original, com a apresentação falada,
-            mantendo o registro mais próximo e pessoal da experiência no hotel fazenda.
+            Um momento de carinho e tranquilidade que representa a experiência no hotel fazenda
+            e o contato próximo com os animais e a natureza.
           </p>
         </div>
 
         <div className={styles.originalVideoFrame}>
-          <video controls playsInline preload="metadata" poster={VIDEO_ORIGINAL_POSTER}>
-            <source src={VIDEO_ORIGINAL} type="video/mp4" />
-            Seu navegador não suporta vídeos HTML5.
-          </video>
+          <Image
+            src={VIDEO_ORIGINAL_POSTER}
+            alt="Mulher fazendo carinho em um cavalo na Toca das Corujas"
+            fill
+            sizes="(max-width: 900px) 100vw, 62vw"
+          />
         </div>
       </section>
 

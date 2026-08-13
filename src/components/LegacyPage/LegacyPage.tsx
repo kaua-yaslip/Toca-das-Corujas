@@ -1,4 +1,5 @@
 import AboutPage from "@/components/AboutPage";
+import SuitesHome from "@/components/Home/SuitesHome";
 import Form from "@/components/Home/Form";
 import type { LegacyPageData } from "@/data/legacyPages";
 
@@ -22,6 +23,15 @@ export default function LegacyPage({ page }: { page: LegacyPageData }) {
     return (
       <>
         <AboutPage />
+        <Form />
+      </>
+    );
+  }
+
+  if (slug === "suites") {
+    return (
+      <>
+        <SuitesHome />
         <Form />
       </>
     );
