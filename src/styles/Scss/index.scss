@@ -2127,6 +2127,26 @@ canvas {
     }
   }
 
+  .cavalinho-foto-card--video {
+    background: #000;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    > video {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      background: #000;
+    }
+  }
+
   .cavalinho-foto-card--destaque {
     grid-row: 1 / span 2;
 

@@ -72,8 +72,7 @@ function VideoPocoto({ src, ariaLabel }: { src: string; ariaLabel: string }) {
       src={src}
       controls
       playsInline
-      preload="auto"
-      poster={caminho(11)}
+      preload="metadata"
       aria-label={ariaLabel}
     >
       Seu navegador não suporta vídeos HTML5.
