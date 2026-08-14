@@ -19,11 +19,14 @@ const fotosDestaque: FotoCavalinho[] = [
   },
 ];
 
+const fotosPreviewLateral: FotoCavalinho[] = [
+  { numero: 4, titulo: "Natureza ao redor", descricao: "Cenários que tornam o passeio ainda mais bonito" },
+  { numero: 6, titulo: "Boas lembranças", descricao: "Registros para guardar com carinho" },
+];
+
 const fotosExtras: FotoCavalinho[] = [
   { numero: 3, titulo: "Cavalos e pôneis", descricao: "Carinho, tranquilidade e boas lembranças" },
-  { numero: 4, titulo: "Natureza ao redor", descricao: "Cenários que tornam o passeio ainda mais bonito" },
   { numero: 5, titulo: "Experiência no campo", descricao: "Um passeio leve e cheio de descobertas" },
-  { numero: 6, titulo: "Boas lembranças", descricao: "Registros para guardar com carinho" },
   { numero: 7, titulo: "Momentos especiais", descricao: "Diversão e tranquilidade em cada passeio" },
   { numero: 8, titulo: "Contato com os animais", descricao: "Uma experiência próxima e acolhedora" },
   { numero: 9, titulo: "Aventura tranquila", descricao: "Passeios em um ambiente agradável" },
@@ -96,33 +99,6 @@ function FotoCard({
   );
 }
 
-function VideoCavalinho() {
-  return (
-    <figure className="cavalinho-video-card">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster={caminho(1)}
-        aria-label="Vídeo de um dos cavalos da Toca das Corujas"
-      >
-        <source src="/assets/videos/pocoto.mp4" type="video/mp4" />
-        Seu navegador não suporta a reprodução deste vídeo.
-      </video>
-
-      <figcaption>
-        <span>02</span>
-        <div>
-          <strong>Conheça de perto nossos cavalos</strong>
-          <small>Um registro especial direto da Toca das Corujas</small>
-        </div>
-      </figcaption>
-    </figure>
-  );
-}
-
 export default function Cavalinho() {
   return (
     <section className="cavalinho">
@@ -180,7 +156,15 @@ export default function Cavalinho() {
           />
         ))}
 
-        <VideoCavalinho />
+        <div className="cavalinho-preview-lateral">
+          {fotosPreviewLateral.map((foto, indice) => (
+            <FotoCard
+              key={foto.numero}
+              foto={foto}
+              numeroVisual={indice + 2}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="galeria-cavalinho">
@@ -216,7 +200,7 @@ export default function Cavalinho() {
                 <FotoCard
                   key={foto.numero}
                   foto={foto}
-                  numeroVisual={indice + 3}
+                  numeroVisual={indice + 4}
                 />
               ))}
             </div>
