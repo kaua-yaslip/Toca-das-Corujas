@@ -17,14 +17,10 @@ const fotosDestaque: FotoCavalinho[] = [
     titulo: "Passeios inesquecíveis",
     descricao: "Momentos especiais em contato com a natureza",
   },
-  {
-    numero: 3,
-    titulo: "Cavalos e pôneis",
-    descricao: "Carinho, tranquilidade e boas lembranças",
-  },
 ];
 
 const fotosExtras: FotoCavalinho[] = [
+  { numero: 3, titulo: "Cavalos e pôneis", descricao: "Carinho, tranquilidade e boas lembranças" },
   { numero: 4, titulo: "Natureza ao redor", descricao: "Cenários que tornam o passeio ainda mais bonito" },
   { numero: 5, titulo: "Experiência no campo", descricao: "Um passeio leve e cheio de descobertas" },
   { numero: 6, titulo: "Boas lembranças", descricao: "Registros para guardar com carinho" },
@@ -100,6 +96,33 @@ function FotoCard({
   );
 }
 
+function VideoCavalinho() {
+  return (
+    <figure className="cavalinho-video-card">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster={caminho(1)}
+        aria-label="Vídeo de um dos cavalos da Toca das Corujas"
+      >
+        <source src="/assets/videos/pocoto.mp4" type="video/mp4" />
+        Seu navegador não suporta a reprodução deste vídeo.
+      </video>
+
+      <figcaption>
+        <span>02</span>
+        <div>
+          <strong>Conheça de perto nossos cavalos</strong>
+          <small>Um registro especial direto da Toca das Corujas</small>
+        </div>
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function Cavalinho() {
   return (
     <section className="cavalinho">
@@ -148,14 +171,16 @@ export default function Cavalinho() {
       </div>
 
       <div className="cavalinho-galeria-preview">
-        {fotosDestaque.map((foto, indice) => (
+        {fotosDestaque.map((foto) => (
           <FotoCard
             key={foto.numero}
             foto={foto}
-            numeroVisual={indice + 1}
-            destaque={indice === 0}
+            numeroVisual={1}
+            destaque
           />
         ))}
+
+        <VideoCavalinho />
       </div>
 
       <div className="galeria-cavalinho">
