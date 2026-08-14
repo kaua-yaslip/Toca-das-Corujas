@@ -15,12 +15,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/assets/imgs-site/logo-icon.png",
+        url: "/favicon.ico",
+        type: "image/x-icon",
+      },
+      {
+        url: "/favicon.png",
         type: "image/png",
       },
     ],
-    shortcut: "/assets/imgs-site/logo-icon.png",
-    apple: "/assets/imgs-site/logo-icon.png",
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
 };
 
