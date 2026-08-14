@@ -2022,7 +2022,7 @@ canvas {
     margin: 0 auto;
     display: grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
-    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
     gap: 20px;
   }
 
@@ -2127,29 +2127,7 @@ canvas {
     }
   }
 
-  .cavalinho-foto-card--video {
-    background: #000;
-
-    &::before,
-    &::after {
-      display: none;
-    }
-
-    > video {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      background: #000;
-    }
-  }
-
   .cavalinho-foto-card--destaque {
-    grid-row: 1 / span 2;
-
     figcaption {
       right: 28px;
       bottom: 28px;
@@ -2471,13 +2449,13 @@ canvas {
     }
 
     .cavalinho-galeria-preview {
-      min-height: 680px;
+      min-height: 410px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: 410px 250px;
+      grid-template-rows: minmax(0, 1fr);
     }
 
     .cavalinho-foto-card--destaque {
-      grid-column: 1 / -1;
+      grid-column: auto;
       grid-row: auto;
     }
   }
@@ -4872,25 +4850,6 @@ canvas {
   box-shadow: 0 9px 22px rgba(0, 0, 0, 0.22);
 }
 
-/* O card "Diversão em família" recebe o vídeo com música. */
-.cavalinho .cavalinho-foto-card {
-  > video {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    display: block;
-    object-fit: cover;
-    background: #160d0b;
-  }
-
-  &.cavalinho-foto-card--video {
-    figcaption {
-      bottom: 58px;
-      pointer-events: none;
-    }
-  }
-}
-
 /* No responsivo os dois vídeos da Home ocupam toda a área disponível da tela. */
 @media (max-width: 900px) {
   .home-video-overlay {
@@ -4938,9 +4897,6 @@ canvas {
   }
 
 
-  .cavalinho .cavalinho-foto-card.cavalinho-foto-card--video figcaption {
-    bottom: 54px;
-  }
 }
 
 /* ==================================================
@@ -5340,16 +5296,6 @@ canvas {
   }
 }
 
-/* Pocotó fica bonito mesmo sendo um vídeo vertical/horizontal diferente. */
-.cavalinho-foto-card--video video {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  background: #1b0c0b;
-}
-
 @media (max-width: 1100px) {
   .suites {
     .suites-item,
@@ -5448,37 +5394,6 @@ canvas {
    Ajustes finais 13/08 - vídeo Pocotó, banner mobile e página Suítes
 ================================================== */
 
-/* No card do Pocotó fica somente o vídeo: sem legenda, número,
-   degradê, bolinha decorativa ou controles do navegador. */
-.cavalinho .cavalinho-foto-card--video {
-  background: #120807;
-
-  &::before,
-  &::after {
-    display: none;
-    content: none;
-  }
-
-  video {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    display: block;
-    border: 0;
-    object-fit: cover;
-    object-position: center;
-    background: #120807;
-  }
-}
-
-/* Mantém a numeração visual das fotos: 01 e 02. O vídeo não entra
-   na sequência, porque agora ele aparece sozinho. */
-.cavalinho .cavalinho-galeria-preview .cavalinho-foto-card--video + .cavalinho-foto-card {
-  figcaption > span {
-    display: grid;
-  }
-}
-
 /* O banner responsivo fica menor e usa contain para mostrar o vídeo
    inteiro, sem ampliar/cortar o conteúdo como na referência enviada. */
 @media (max-width: 900px) {
@@ -5575,23 +5490,6 @@ canvas {
   .bannerIndex .banner-css {
     height: auto;
     min-height: 0;
-  }
-}
-
-/*
- * O Pocotó não inicia sozinho. Os controles nativos ficam visíveis,
- * oferecendo Play/Pause e volume ao visitante.
- */
-.cavalinho .cavalinho-foto-card--video {
-  background: #120807;
-
-  video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-    background: #120807;
   }
 }
 
@@ -5698,13 +5596,6 @@ canvas {
   .included-form-fields .contatoFormIncluded {
     width: 100%;
   }
-}
-
-/* Deixa o player do Pocotó sempre clicável acima de qualquer decoração do card. */
-.cavalinho .cavalinho-foto-card--video video {
-  position: relative;
-  z-index: 6;
-  pointer-events: auto;
 }
 
 @media (max-width: 980px) {

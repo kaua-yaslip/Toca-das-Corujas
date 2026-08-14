@@ -8,22 +8,14 @@ interface FotoCavalinho {
   numero: number;
   titulo: string;
   descricao: string;
-  video?: string;
 }
 
-const VIDEO_CAVALO_COM_MUSICA = "/assets/imgs-site/pocoto.mp4";
 
 const fotosDestaque: FotoCavalinho[] = [
   {
     numero: 1,
     titulo: "Passeios inesquecíveis",
     descricao: "Momentos especiais em contato com a natureza",
-  },
-  {
-    numero: 11,
-    titulo: "Diversão em família",
-    descricao: "Uma experiência para todas as idades",
-    video: VIDEO_CAVALO_COM_MUSICA,
   },
   {
     numero: 3,
@@ -66,19 +58,6 @@ const fotosCavalos: Record<number, string> = {
 const caminho = (numero: number) => fotosCavalos[numero];
 
 
-function VideoPocoto({ src, ariaLabel }: { src: string; ariaLabel: string }) {
-  return (
-    <video
-      src={src}
-      controls
-      playsInline
-      preload="metadata"
-      aria-label={ariaLabel}
-    >
-      Seu navegador não suporta vídeos HTML5.
-    </video>
-  );
-}
 
 const galeriaUrl =
   "https://photos.google.com/share/AF1QipO6f9j0_bksZWO0Itbvh6H1pl3D1VkQnl05augD3-tAzWIdXIvnKddjP85rReFIAA/memory/AF1QipMT_2AkCW0zasrmOITahWgHO8x1u_uB14yetH3kjNwIPHFFuAT8fm1dkeSdcErIXA?key=bjhxOHpJRkFRRHdWZ0NRT3h2aGdYc250alJtNE1B";
@@ -94,28 +73,21 @@ function FotoCard({
 }) {
   return (
     <figure
-      className={`cavalinho-foto-card${destaque ? " cavalinho-foto-card--destaque" : ""}${foto.video ? " cavalinho-foto-card--video" : ""}`}
+      className={`cavalinho-foto-card${destaque ? " cavalinho-foto-card--destaque" : ""}`}
     >
-      {foto.video ? (
-        <VideoPocoto
-          src={foto.video}
-          ariaLabel={`${foto.titulo} na Toca das Corujas`}
-        />
-      ) : (
-        <Image
-          src={caminho(foto.numero)}
-          alt={`${foto.titulo} na Toca das Corujas`}
-          width={760}
-          height={760}
-          sizes={
-            destaque
-              ? "(max-width: 600px) 100vw, (max-width: 900px) 100vw, 62vw"
-              : "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 32vw"
-          }
-        />
-      )}
+      <Image
+        src={caminho(foto.numero)}
+        alt={`${foto.titulo} na Toca das Corujas`}
+        width={760}
+        height={760}
+        sizes={
+          destaque
+            ? "(max-width: 600px) 100vw, (max-width: 900px) 100vw, 62vw"
+            : "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 32vw"
+        }
+      />
 
-      {!foto.video && numeroVisual !== undefined && (
+      {numeroVisual !== undefined && (
         <figcaption>
           <span>{String(numeroVisual).padStart(2, "0")}</span>
           <div>
@@ -180,13 +152,7 @@ export default function Cavalinho() {
           <FotoCard
             key={foto.numero}
             foto={foto}
-            numeroVisual={
-              foto.video
-                ? undefined
-                : fotosDestaque
-                    .slice(0, indice + 1)
-                    .filter((item) => !item.video).length
-            }
+            numeroVisual={indice + 1}
             destaque={indice === 0}
           />
         ))}
