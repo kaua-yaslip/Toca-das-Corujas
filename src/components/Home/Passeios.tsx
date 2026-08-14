@@ -10,6 +10,7 @@ type VideoItem = {
 };
 
 const cavalos: VideoItem[] = [
+  { src: "/assets/imgs-site/pocoto.mp4" },
   { src: "/assets/imgs-site/novas-fotos/cavalo1.mp4" },
   { src: "/assets/imgs-site/novas-fotos/cavalo2.mp4" },
   { src: "/assets/imgs-site/novas-fotos/cavalo3.mp4" },
