@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { FaMapMarkedAlt, FaPhone } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
@@ -48,7 +49,38 @@ export default function Form() {
           </div>
         </div>
 
-        <ContactForm variation="contatoFormIncluded" />
+        <div className="included-form-layout">
+          <aside className="included-form-map" aria-label="Mapa desenhado para chegar à Toca das Corujas">
+            <div className="included-form-map-card">
+              <span className="included-form-map-kicker">Como chegar</span>
+              <h3>Mapa de referência</h3>
+
+              <div className="included-form-map-image">
+                <Image
+                  src="/assets/imgs-site/DesenhadoMapa.webp"
+                  alt="Mapa desenhado com referências do caminho até a Toca das Corujas"
+                  width={576}
+                  height={1024}
+                  sizes="(max-width: 900px) 92vw, 38vw"
+                />
+              </div>
+
+              <Link
+                href={urlMaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="included-form-map-link"
+              >
+                <FaMapMarkedAlt aria-hidden="true" />
+                Abrir localização no Google Maps
+              </Link>
+            </div>
+          </aside>
+
+          <div className="included-form-fields">
+            <ContactForm variation="contatoFormIncluded" />
+          </div>
+        </div>
       </div>
     </section>
   );

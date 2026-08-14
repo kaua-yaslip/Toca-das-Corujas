@@ -72,7 +72,7 @@ function VideoPocoto({ src, ariaLabel }: { src: string; ariaLabel: string }) {
       src={src}
       controls
       playsInline
-      preload="metadata"
+      preload="auto"
       poster={caminho(11)}
       aria-label={ariaLabel}
     >

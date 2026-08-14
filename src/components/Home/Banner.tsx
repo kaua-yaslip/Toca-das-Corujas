@@ -4,15 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const INTRO_VIDEO_DESKTOP = "/assets/imgs-site/banner/banner3.mp4";
 const INTRO_VIDEO_MOBILE = "/assets/imgs-site/corujamobile.mp4";
-const INTRO_VIDEO_FALLBACK = "/assets/imgs-site/corujamobile.mp4";
-
 const BANNER_VIDEO_DESKTOP = "/assets/imgs-site/bannervideo.mp4";
-const BANNER_VIDEO_MOBILE = "/assets/imgs-site/banner/bannervideo-mobile.mp4";
+const BANNER_VIDEO_MOBILE = "/assets/imgs-site/corujamobile.mp4";
 
 export default function Banner() {
   const [showIntroVideo, setShowIntroVideo] = useState(true);
-  const [introSrc, setIntroSrc] = useState(INTRO_VIDEO_DESKTOP);
-  const [mediaResolved, setMediaResolved] = useState(false);
   const introVideoRef = useRef<HTMLVideoElement | null>(null);
 
   const pararIntro = useCallback(() => {
@@ -36,66 +32,35 @@ export default function Banner() {
     setShowIntroVideo(false);
   }, [pararIntro]);
 
-  const iniciarIntroComSom = useCallback(async () => {
+  const garantirReproducao = useCallback(async () => {
     const video = introVideoRef.current;
     if (!video || !showIntroVideo) return;
 
     /*
-     * Primeira tentativa: reproduzir diretamente com o áudio existente
-     * dentro do próprio MP4. Se o navegador permitir autoplay com som,
-     * ele já inicia em volume máximo.
+     * Primeiro tentamos o áudio do próprio MP4. Caso Chrome/Safari bloqueiem
+     * autoplay com som, o vídeo continua automaticamente mudo e o som é
+     * liberado na primeira interação do visitante.
      */
-    video.muted = false;
-    video.defaultMuted = false;
     video.volume = 1;
+    video.defaultMuted = false;
+    video.muted = false;
 
     try {
       await video.play();
-      video.muted = false;
-      video.defaultMuted = false;
-      video.volume = 1;
       return;
     } catch {
-      /*
-       * Chrome/Safari podem bloquear autoplay com áudio sem uma ação do
-       * visitante. Nesse caso mantemos o vídeo rodando para não travar a
-       * abertura e liberamos o som na primeira interação feita na página.
-       */
-      video.muted = true;
       video.defaultMuted = true;
+      video.muted = true;
       video.volume = 1;
 
       try {
         await video.play();
       } catch {
-        // A primeira interação do usuário fará uma nova tentativa.
+        // Se o navegador também bloquear o autoplay mudo, os eventos abaixo
+        // fazem uma nova tentativa assim que o arquivo estiver pronto.
       }
     }
   }, [showIntroVideo]);
-
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 768px)");
-
-    const atualizarVideo = () => {
-      setIntroSrc(media.matches ? INTRO_VIDEO_MOBILE : INTRO_VIDEO_DESKTOP);
-      setMediaResolved(true);
-    };
-
-    atualizarVideo();
-    media.addEventListener("change", atualizarVideo);
-
-    return () => media.removeEventListener("change", atualizarVideo);
-  }, []);
-
-  useEffect(() => {
-    if (!showIntroVideo || !mediaResolved) return;
-
-    const video = introVideoRef.current;
-    if (!video) return;
-
-    video.load();
-    void iniciarIntroComSom();
-  }, [introSrc, iniciarIntroComSom, mediaResolved, showIntroVideo]);
 
   useEffect(() => {
     if (!showIntroVideo) return;
@@ -104,11 +69,10 @@ export default function Banner() {
       const video = introVideoRef.current;
       if (!video) return;
 
-      video.muted = false;
       video.defaultMuted = false;
+      video.muted = false;
       video.volume = 1;
       void video.play().catch(() => undefined);
-
       removerEventos();
     };
 
@@ -129,33 +93,49 @@ export default function Banner() {
     return () => pararIntro();
   }, [pararIntro]);
 
-  const usarFallback = useCallback(() => {
-    if (introSrc !== INTRO_VIDEO_FALLBACK) {
-      setIntroSrc(INTRO_VIDEO_FALLBACK);
+  const usarFallbackDaCoruja = useCallback(() => {
+    const video = introVideoRef.current;
+    if (!video) return;
+
+    if (!video.currentSrc.includes("corujamobile.mp4")) {
+      video.src = INTRO_VIDEO_MOBILE;
+      video.load();
+      void garantirReproducao();
     }
-  }, [introSrc]);
+  }, [garantirReproducao]);
 
   return (
     <>
       {showIntroVideo && (
         <div className="home-video-overlay">
-          {mediaResolved && (
-            <video
-              ref={introVideoRef}
-              key={introSrc}
-              className="home-fullscreen-video"
-              src={introSrc}
-              autoPlay
-              playsInline
-              preload="auto"
-              onLoadedMetadata={() => void iniciarIntroComSom()}
-              onCanPlay={() => void iniciarIntroComSom()}
-              onError={usarFallback}
-              onEnded={fecharIntroVideo}
-            >
-              Seu navegador não suporta vídeos HTML5.
-            </video>
-          )}
+          <video
+            ref={introVideoRef}
+            className="home-fullscreen-video"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onLoadedMetadata={() => void garantirReproducao()}
+            onLoadedData={() => void garantirReproducao()}
+            onCanPlay={() => void garantirReproducao()}
+            onError={usarFallbackDaCoruja}
+            onEnded={fecharIntroVideo}
+          >
+            {/* No celular o navegador escolhe este arquivo imediatamente. */}
+            <source
+              media="(max-width: 768px)"
+              src={INTRO_VIDEO_MOBILE}
+              type="video/mp4"
+            />
+
+            {/* Desktop mantém o banner3 quando ele existir no projeto. */}
+            <source src={INTRO_VIDEO_DESKTOP} type="video/mp4" />
+
+            {/* Fallback real: garante que o overlay nunca fique vazio. */}
+            <source src={INTRO_VIDEO_MOBILE} type="video/mp4" />
+
+            Seu navegador não suporta vídeos HTML5.
+          </video>
 
           <button
             type="button"
