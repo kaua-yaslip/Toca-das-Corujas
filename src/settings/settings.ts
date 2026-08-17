@@ -4,7 +4,7 @@ const siteName = "Toca das Corujas";
 const title = `Início | ${siteName}`;
 const description = "Toca das Corujas, hotel fazenda em Angatuba, São Paulo.";
 const keywords = "Toca das Corujas, hotel fazenda, hospedagem, Angatuba";
-export const url = "https://www.nomesite.com.br/";
+export const url = "https://www.tocadascorujas.com.br/";
 
 // True = Ativo || False = Inativo - Para ativar ou desativar os includes das páginas contratadas
 export const includes = {
