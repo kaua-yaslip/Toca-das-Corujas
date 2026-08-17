@@ -72,7 +72,7 @@ function VideoCarousel({ videos, ariaLabel }: VideoCarouselProps) {
         <video
           key={video.src}
           controls
-          preload="metadata"
+          preload="none"
           poster={video.poster}
         >
           <source src={video.src} type="video/mp4" />
