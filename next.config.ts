@@ -134,6 +134,13 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
 
+      {
+        source: "/festas-sitio.php",
+        destination: "/salao-para-festas",
+        statusCode: 301,
+      },
+
+
       // ==================================================
       // REDIRECT DO DOMÍNIO SEM WWW -> COM WWW
       // Deixe essa regra POR ÚLTIMO
@@ -153,5 +160,7 @@ const nextConfig: NextConfig = {
     ];
   },
 };
+
+
 
 export default nextConfig;
