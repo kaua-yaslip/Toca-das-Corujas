@@ -24,7 +24,7 @@ export const settings: SiteSettings = {
   ddd: "11",
   selosDark: true,
   numeroTelefone: "99564-5738",
-  whatsappApi: "https://api.whatsapp.com/send?phone=5511995645738",
+  whatsappApi: "https://api.whatsapp.com/send?phone=5511995645738&text=Olá!%20Vim%20do%20Google%20e%20gostaria%20de%20mais%20informações%20e%20Orçamento",
   numeroWhatsapp: "99564-5738",
   email: "marcos@yaslip.com.br",
   emailDestinatario: "marcos@yaslip.com.br",
