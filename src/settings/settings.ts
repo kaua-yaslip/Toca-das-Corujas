@@ -32,12 +32,12 @@ export const settings: SiteSettings = {
     // Localização oficial enviada para a Toca das Corujas.
     urlMaps:
       "https://www.google.com/maps?cid=15877795217209804611&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF&hl=pt-BR&gl=BR&source=embed",
-    rua: "Rodovia Raposo Tavares",
-    numero: "KM 205",
-    bairro: "",
+    rua: "Hotel Fazenda Toca das Corujas",
+    numero: "1",
+    bairro: "Bairro dos Coqueiros",
     cidade: "Angatuba",
     estado: "SP",
-    cep: "",
+    cep: "18240000",
     // URL própria para iframe. O parâmetro output=embed evita o bloqueio
     // que ocorre ao tentar carregar a página normal do Google Maps em um iframe.
     mapaEmbed:

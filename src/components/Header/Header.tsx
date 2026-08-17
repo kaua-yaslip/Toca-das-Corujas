@@ -21,9 +21,9 @@ const lazerLinks = [
 ] as const;
 
 const suitesLinks = [
-  ["/suites#suites-standard", "Suíte Standard"],
-  ["/suites#suites-luxo", "Suíte Luxo"],
-  ["/suites#suites-master", "Suíte Master"],
+  ["/suites#suites-standard", "Quarto Standard"],
+  ["/suites#suites-premium", "Quarto Premium"],
+  ["/suites#suites-master", "Quarto Master"],
 ] as const;
 
 export default function Header() {
