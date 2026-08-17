@@ -32,7 +32,7 @@ export default function Form() {
           </div>
 
           <div className="contact">
-            <Link href={`tel:+55${phoneDigits}`}>
+            <Link href={`tel:0${phoneDigits}`}>
               <FaPhone aria-hidden="true" />
               <span>{`(${ddd}) ${numeroTelefone}`}</span>
             </Link>

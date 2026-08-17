@@ -13,7 +13,7 @@ export default function RodapeMobile() {
       <div className="icones-rodape">
         <a
           className="phone icone"
-          href={`tel:+55${phoneDigits}`}
+          href={`tel:${phoneDigits}`}
           title="Telefone para contato"
           aria-label={`Ligar para ${siteName}`}
         >

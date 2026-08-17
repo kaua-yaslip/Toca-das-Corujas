@@ -66,7 +66,7 @@ export default function Page() {
             </div>
 
             <div className="contato-lista">
-              <Link href={`tel:+55${phoneDigits}`} className="contato-item">
+              <Link href={`tel:0${phoneDigits}`} className="contato-item">
                 <span className="contato-icone" aria-hidden="true">
                   <FaPhone />
                 </span>
