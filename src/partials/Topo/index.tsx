@@ -33,14 +33,12 @@ export default function Topo() {
   const pathname = usePathname();
   const [menuAberto, setMenuAberto] = useState(false);
   const [lazerAberto, setLazerAberto] = useState(false);
-  const [suitesAberto, setSuitesAberto] = useState(false);
   const [dropdownDesktopAberto, setDropdownDesktopAberto] = useState<"lazer" | "suites" | null>(null);
   const [rolado, setRolado] = useState(false);
 
   function fecharMenu() {
     setMenuAberto(false);
     setLazerAberto(false);
-    setSuitesAberto(false);
   }
 
   function fecharDropdownDesktop() {
@@ -211,18 +209,8 @@ export default function Topo() {
               </ul>
             </li>
 
-            <li className="dropdown-mobile">
-              <div className="dropdown-mobile-header">
-                <Link href="/suites" className={`nav-link ${rotaAtiva("/suites") ? "ativo" : ""}`} onClick={fecharMenu}>SUÍTES</Link>
-                <button type="button" onClick={() => setSuitesAberto((valor) => !valor)} aria-label="Abrir submenu de suítes" aria-expanded={suitesAberto}>
-                  {suitesAberto ? <FaMinus /> : <FaPlus />}
-                </button>
-              </div>
-              {/* <ul className={`dropdown-list-mobile ${suitesAberto ? "ativo" : ""}`}>
-                {linksSuites.map(([href, label]) => (
-                  <li key={href}><Link href={href} onClick={fecharMenu}>{label}</Link></li>
-                ))}
-              </ul> */}
+            <li>
+              <Link href="/suites" className={`nav-link ${rotaAtiva("/suites") ? "ativo" : ""}`} onClick={fecharMenu}>SUÍTES</Link>
             </li>
 
             <li><Link href="/contato" className={`nav-link ${rotaAtiva("/contato") ? "ativo" : ""}`} onClick={fecharMenu}>CONTATO</Link></li>

@@ -1,7 +1,6 @@
 .progress-mobile {
     position: relative;
-    // background: linear-gradient(135deg, #92bda8, #fff687);
-    background-color: #f4bc33;
+    background-color: #670b0e;
     border: 2px solid #fff;
     width: 60px !important;
     height: 60px !important;
@@ -19,12 +18,11 @@
     }
 
     .progress-bg {
-        // color: rgba(146, 189, 168, 0.25);
-        color: #fff;
+        color: rgba(255, 255, 255, 0.35);
     }
 
     .progress-bar {
-        color: #000;
+        color: #fff;
         transition: stroke-dashoffset 0.15s ease-out;
     }
 

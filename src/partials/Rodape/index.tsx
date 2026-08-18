@@ -48,7 +48,14 @@ export default function Rodape() {
 
       <div className="bottomRowFooter">
         <p>
-          Copyright © {year} {siteName}. Todos os direitos reservados.
+          Copyright © {year} {siteName}. Todos os direitos reservados
+          <Link
+            href="/mapa-site"
+            className="footer-mapa-site-link"
+            aria-label="Ir para o mapa do site"
+          >
+            .
+          </Link>
         </p>
 
         <div className="footerSelos" aria-label="Qualidade e validações do site">
