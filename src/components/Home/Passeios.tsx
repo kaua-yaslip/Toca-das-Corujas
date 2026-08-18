@@ -10,7 +10,7 @@ type VideoItem = {
 };
 
 const cavalos: VideoItem[] = [
-  { src: "/assets/imgs-site/Pocoto.mp4" },
+  { src: "/assets/imgs-site/pocoto.mp4" },
   { src: "/assets/imgs-site/novas-fotos/cavalo1.mp4" },
   { src: "/assets/imgs-site/novas-fotos/cavalo2.mp4" },
   { src: "/assets/imgs-site/novas-fotos/cavalo3.mp4" },
@@ -72,7 +72,8 @@ function VideoCarousel({ videos, ariaLabel }: VideoCarouselProps) {
         <video
           key={video.src}
           controls
-          preload="none"
+          playsInline
+          preload="metadata"
           poster={video.poster}
         >
           <source src={video.src} type="video/mp4" />

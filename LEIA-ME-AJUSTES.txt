@@ -1,0 +1,20 @@
+Toca das Corujas - ajustes de 18/08/2026
+
+Arquivos deste pacote devem ser copiados sobre o projeto atual, preservando a estrutura de pastas.
+
+Alterações incluídas:
+- 24 fotos antigas motelFazenda01.jpg até motelFazenda24.jpg adicionadas em public/assets/imgs-site/suites/.
+- Correção do caminho do vídeo Pocotó para /assets/imgs-site/pocoto.mp4 e melhorias de compatibilidade mobile no player.
+- Vídeo inicial com tentativa de reprodução com som; quando autoplay audível for bloqueado, aparece o botão "Assistir com som" para iniciar o vídeo desde o começo com áudio após um toque do usuário.
+- reCAPTCHA v3 alinhado entre cliente e servidor, com script carregado de forma previsível, action contact_form, score mínimo e segredo apenas no backend via .env.
+- Formulário corrigido para não exigir token no cliente quando o reCAPTCHA estiver desativado e para não usar Buffer no navegador.
+- Redirects adicionados: cavalos-poneis-adestrados.php e descida-rapel.php, sem duplicatas.
+- .env e .env.local adicionados ao .gitignore.
+
+Validações executadas:
+- TypeScript: sem erros.
+- ESLint: sem erros; 1 warning pré-existente em RecintoGeral.tsx.
+- Build completo: não executado porque o node_modules recebido não contém o binário SWC Linux exigido pelo Next.js neste ambiente.
+
+Importante sobre vídeos:
+O ZIP "Nova pasta.zip" recebido nesta revisão não continha a pasta public original e, portanto, não continha os arquivos pocoto.mp4, corujamobile.mp4, banner3.mp4 ou bannervideo.mp4. O código foi corrigido, mas os binários de vídeo precisam continuar presentes no public do projeto/deploy para a reprodução funcionar.

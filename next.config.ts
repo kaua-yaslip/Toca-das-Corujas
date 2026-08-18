@@ -39,6 +39,16 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       {
+        source: "/cavalos-poneis-adestrados.php",
+        destination: "/hotel-fazenda-com-passeio-de-cavalos-e-poneis-adestrados",
+        statusCode: 301,
+      },
+      {
+        source: "/descida-rapel.php",
+        destination: "/hotel-fazenda",
+        statusCode: 301,
+      },
+      {
         source: "/egua-matrizes-lusitana.php",
         destination: "/passeio-a-cavalo",
         statusCode: 301,
