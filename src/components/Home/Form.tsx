@@ -21,7 +21,7 @@ const completeAddress = [
 
 export default function Form() {
   return (
-    <section className="included-form">
+    <section className="included-form" id="como-chegar">
       <div className="base">
         <div className="box-details">
           <div className="box-title">

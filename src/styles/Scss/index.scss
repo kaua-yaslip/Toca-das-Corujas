@@ -3401,7 +3401,8 @@ canvas {
 /* ---------------------- Mapa do Site ------------------ */
 #mapaSite {
   line-height: 25px;
-  padding: 40px 8%;
+  padding: 40px 10% 70px;
+  background: #ffffff;
 
   h2 {
     padding: 15px 0 30px 0;
@@ -3410,15 +3411,25 @@ canvas {
 
   a {
     color: #020617;
+    text-decoration: none;
   }
 
   ul.menuList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
     font-size: 20px;
     line-height: 35px;
+
+    > li {
+      width: fit-content;
+    }
   }
 
   ul.sitemapList {
-    margin-left: 35px;
+    margin: 10px 0 0 35px;
+    padding: 0;
+    list-style: none;
     counter-reset: numeros;
     line-height: 45px;
     font-size: 18px;
@@ -3442,12 +3453,32 @@ canvas {
         font-size: 13px;
         border: 1.5px solid rgb(0, 0, 0);
         border-radius: 50%;
-        line-height: 25px;
+        line-height: 22px;
+        background: #ffffff;
       }
 
       &:hover {
         transform: translateX(10px);
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 32px 8% 55px;
+
+    h2 {
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    ul.menuList {
+      font-size: 18px;
+    }
+
+    ul.sitemapList {
+      margin-left: 22px;
+      font-size: 16px;
+      line-height: 42px;
     }
   }
 }

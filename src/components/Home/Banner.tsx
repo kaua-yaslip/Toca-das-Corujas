@@ -26,55 +26,100 @@ export default function Banner() {
     setShowIntroVideo(false);
   }, []);
 
-  const iniciarComSom = useCallback((reiniciar = false) => {
+  const tocarComSom = useCallback(async (reiniciar = false) => {
     const video = introVideoRef.current;
-    if (!video) return;
+    if (!video) return false;
 
     if (reiniciar) {
-      video.currentTime = 0;
+      try {
+        video.currentTime = 0;
+      } catch {
+        // Alguns navegadores ainda podem estar preparando o arquivo.
+      }
     }
 
     video.muted = false;
+    video.defaultMuted = false;
     video.volume = 1;
 
-    const tentativa = video.play();
-
-    if (!tentativa) {
+    try {
+      await video.play();
       setSomAtivo(true);
       setAguardandoInteracao(false);
-      return;
+      return true;
+    } catch {
+      return false;
     }
-
-    tentativa
-      .then(() => {
-        setSomAtivo(true);
-        setAguardandoInteracao(false);
-      })
-      .catch(() => {
-        // Android/Chrome e outros navegadores podem bloquear autoplay audível.
-        // Mantemos o vídeo no início e pedimos um toque real do usuário.
-        video.pause();
-        video.currentTime = 0;
-        video.muted = true;
-        setSomAtivo(false);
-        setAguardandoInteracao(true);
-      });
   }, []);
 
-  const tentarAutoplayComSom = useCallback(() => {
+  const iniciarFallbackSemSom = useCallback(async () => {
+    const video = introVideoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 1;
+
+    try {
+      await video.play();
+    } catch {
+      // Se nem o autoplay mudo for liberado, o primeiro toque abaixo tenta novamente.
+    }
+
+    setSomAtivo(false);
+    setAguardandoInteracao(true);
+  }, []);
+
+  const tentarAutoplayComSom = useCallback(async () => {
     if (tentativaInicialRef.current) return;
     tentativaInicialRef.current = true;
-    iniciarComSom(false);
-  }, [iniciarComSom]);
+
+    const tocouComSom = await tocarComSom(false);
+
+    if (!tocouComSom) {
+      // Chrome/Android, Safari/iOS e outros navegadores podem impedir áudio
+      // automático antes de qualquer interação do visitante. Nesses casos,
+      // o vídeo continua rodando e o primeiro toque ativa o som imediatamente.
+      await iniciarFallbackSemSom();
+    }
+  }, [iniciarFallbackSemSom, tocarComSom]);
+
+  const ativarSomAposInteracao = useCallback(async () => {
+    if (!aguardandoInteracao) return;
+
+    const tocouComSom = await tocarComSom(true);
+
+    if (!tocouComSom) {
+      await iniciarFallbackSemSom();
+    }
+  }, [aguardandoInteracao, iniciarFallbackSemSom, tocarComSom]);
 
   useEffect(() => {
     const video = introVideoRef.current;
     if (!video) return;
 
     if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-      tentarAutoplayComSom();
+      void tentarAutoplayComSom();
     }
   }, [tentarAutoplayComSom]);
+
+  useEffect(() => {
+    if (!aguardandoInteracao) return;
+
+    const ativar = () => {
+      void ativarSomAposInteracao();
+    };
+
+    document.addEventListener("pointerdown", ativar, { once: true, capture: true });
+    document.addEventListener("touchstart", ativar, { once: true, capture: true, passive: true });
+    document.addEventListener("keydown", ativar, { once: true, capture: true });
+
+    return () => {
+      document.removeEventListener("pointerdown", ativar, true);
+      document.removeEventListener("touchstart", ativar, true);
+      document.removeEventListener("keydown", ativar, true);
+    };
+  }, [aguardandoInteracao, ativarSomAposInteracao]);
 
   return (
     <>
@@ -83,9 +128,12 @@ export default function Banner() {
           <video
             ref={introVideoRef}
             className="home-fullscreen-video"
+            autoPlay
             playsInline
             preload="auto"
-            onLoadedData={tentarAutoplayComSom}
+            muted={false}
+            onLoadedData={() => void tentarAutoplayComSom()}
+            onCanPlay={() => void tentarAutoplayComSom()}
             onEnded={fecharIntroVideo}
           >
             <source
@@ -101,10 +149,10 @@ export default function Banner() {
             <button
               type="button"
               className="home-video-sound"
-              onClick={() => iniciarComSom(true)}
-              aria-label="Assistir ao vídeo de abertura com som"
+              onClick={() => void tocarComSom(true)}
+              aria-label="Ativar o som do vídeo de abertura"
             >
-              Assistir com som
+              Toque para ativar o som
             </button>
           )}
 
