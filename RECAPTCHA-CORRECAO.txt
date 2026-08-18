@@ -1,0 +1,22 @@
+RECAPTCHA - CORREÇÃO DO ERRO DE DOMÍNIO
+
+O projeto está configurado para reCAPTCHA v3. O código do formulário já usa a chave pública no cliente e a chave secreta somente no backend.
+
+O erro "ERROR for site owner: Invalid domain for site key" significa que a chave atual não está autorizada para o domínio em que o site está rodando. Isso é uma configuração da chave no Google, não um erro de CSS/React/Next.js.
+
+ESTADO DESTE PACOTE
+- reCAPTCHA temporariamente desativado para remover o erro da tela e permitir o envio do formulário.
+
+COMO REATIVAR
+1. No painel do reCAPTCHA, edite a chave v3 usada pelo site ou crie uma nova chave v3.
+2. Autorize o domínio: tocadascorujas.com.br
+3. Se o painel exigir, confira também o acesso por www.tocadascorujas.com.br.
+4. Atualize no servidor:
+   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=<sua chave pública v3>
+   RECAPTCHA_SECRET_KEY=<sua chave secreta v3>
+   NEXT_PUBLIC_RECAPTCHA_ENABLED=true
+   RECAPTCHA_ENABLED=true
+5. Faça um novo build/deploy do Next.js, porque variáveis NEXT_PUBLIC_* entram no bundle do cliente durante o build.
+
+IMPORTANTE
+A chave secreta nunca deve ser exposta no componente React ou em arquivos públicos.

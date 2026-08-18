@@ -18,3 +18,12 @@ Validações executadas:
 
 Importante sobre vídeos:
 O ZIP "Nova pasta.zip" recebido nesta revisão não continha a pasta public original e, portanto, não continha os arquivos pocoto.mp4, corujamobile.mp4, banner3.mp4 ou bannervideo.mp4. O código foi corrigido, mas os binários de vídeo precisam continuar presentes no public do projeto/deploy para a reprodução funcionar.
+
+
+Correção adicional do reCAPTCHA (18/08/2026):
+- O erro visual "ERROR for site owner: Invalid domain for site key" não é causado pelo componente React; ele indica que a chave pública atual não autoriza o domínio do site.
+- Para evitar que o site exiba o erro e para manter o formulário funcionando, o reCAPTCHA foi temporariamente desativado no .env:
+  RECAPTCHA_ENABLED=false
+  NEXT_PUBLIC_RECAPTCHA_ENABLED=false
+- Para reativar a proteção, cadastre/autorize o domínio tocadascorujas.com.br na mesma chave reCAPTCHA v3 (ou gere um novo par de chaves v3 para esse domínio) e depois altere os dois flags acima para true.
+- Nunca coloque a chave secreta no código do navegador; ela deve continuar somente no .env do servidor.
