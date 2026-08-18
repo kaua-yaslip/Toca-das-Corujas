@@ -88,8 +88,19 @@ canvas {
   display: block;
 }
 
-.home-video-close {
+.home-video-actions {
   position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.home-video-close {
+  position: relative;
   z-index: 100000;
   padding: 10px 16px;
   border: none;
@@ -101,12 +112,6 @@ canvas {
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease;
 }
-
-.home-video-close {
-  top: 16px;
-  right: 16px;
-}
-
 
 .home-video-close:hover {
   transform: translateY(-1px);
@@ -121,9 +126,13 @@ canvas {
     height: 100dvh;
   }
 
-  .home-video-close {
+  .home-video-actions {
     top: 12px;
     right: 12px;
+    gap: 7px;
+  }
+
+  .home-video-close {
     padding: 8px 14px;
     font-size: 12px;
   }
@@ -5841,53 +5850,50 @@ canvas {
 }
 
 .home-video-sound {
-  position: fixed;
-  left: 50%;
-  bottom: 28px;
-  z-index: 100000;
-  transform: translateX(-50%);
-  min-width: 190px;
-  padding: 13px 22px;
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 10px 16px;
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 999px;
   background: rgba(93, 18, 18, 0.94);
   color: #ffffff;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
   cursor: pointer;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .home-video-sound:hover {
-  transform: translateX(-50%) translateY(-1px);
+  transform: translateY(-1px);
   background: rgba(120, 21, 21, 0.98);
 }
 
 .home-video-sound-status {
-  position: fixed;
-  left: 16px;
-  bottom: 16px;
-  z-index: 100000;
-  padding: 7px 11px;
+  position: relative;
+  z-index: 1;
+  padding: 9px 13px;
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.55);
   color: #ffffff;
   font-size: 12px;
   font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
   pointer-events: none;
 }
 
 @media (max-width: 768px) {
   .home-video-sound {
-    bottom: max(22px, env(safe-area-inset-bottom));
-    min-width: 178px;
-    padding: 12px 18px;
-    font-size: 14px;
+    padding: 8px 13px;
+    font-size: 12px;
   }
 
   .home-video-sound-status {
-    left: 12px;
-    bottom: max(12px, env(safe-area-inset-bottom));
+    padding: 8px 11px;
+    font-size: 11px;
   }
 }

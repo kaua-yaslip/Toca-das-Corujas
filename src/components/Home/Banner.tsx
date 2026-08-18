@@ -145,31 +145,33 @@ export default function Banner() {
             Seu navegador não suporta vídeos HTML5.
           </video>
 
-          {aguardandoInteracao && (
+          <div className="home-video-actions">
+            {aguardandoInteracao && (
+              <button
+                type="button"
+                className="home-video-sound"
+                onClick={() => void tocarComSom(true)}
+                aria-label="Ativar o som do vídeo de abertura"
+              >
+                Ativar som
+              </button>
+            )}
+
+            {!aguardandoInteracao && somAtivo && (
+              <span className="home-video-sound-status" aria-live="polite">
+                Som ativado
+              </span>
+            )}
+
             <button
               type="button"
-              className="home-video-sound"
-              onClick={() => void tocarComSom(true)}
-              aria-label="Ativar o som do vídeo de abertura"
+              className="home-video-close"
+              onClick={fecharIntroVideo}
+              aria-label="Fechar vídeo de abertura"
             >
-              Toque para ativar o som
+              Fechar
             </button>
-          )}
-
-          {!aguardandoInteracao && somAtivo && (
-            <span className="home-video-sound-status" aria-live="polite">
-              Som ativado
-            </span>
-          )}
-
-          <button
-            type="button"
-            className="home-video-close"
-            onClick={fecharIntroVideo}
-            aria-label="Fechar vídeo de abertura"
-          >
-            Fechar
-          </button>
+          </div>
         </div>
       )}
 
