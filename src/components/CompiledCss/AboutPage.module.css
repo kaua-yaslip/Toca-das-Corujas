@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   isolation: isolate;
-  background-image: url("/banner/banner2.webp");
+  background-image: url("/assets/imgs-site/sobre/banner-sobre.webp");
   background-size: cover;
   background-position: center 50%;
 }
@@ -270,6 +270,58 @@
   background: var(--wine);
 }
 
+.originalVideoSection {
+  width: min(1280px, 100% - 80px);
+  margin: 0 auto;
+  padding: 0 0 130px;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.75fr) minmax(0, 1.25fr);
+  align-items: center;
+  gap: clamp(44px, 7vw, 100px);
+}
+
+.originalVideoText h2 {
+  max-width: 560px;
+  margin: 22px 0 0;
+  color: var(--wine-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(38px, 4.2vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.originalVideoText p {
+  max-width: 560px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.originalVideoFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  border: 10px solid #fff;
+  background: #1e1715;
+  box-shadow: 0 30px 70px rgba(58, 22, 16, 0.2);
+}
+
+.originalVideoFrame::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+}
+
+.originalVideoFrame img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .experienceSection {
   padding: 120px max(40px, (100vw - 1280px) / 2);
   background: radial-gradient(circle at 0 0, rgba(127, 8, 8, 0.07), transparent 30%), var(--cream);
@@ -489,7 +541,7 @@
   display: grid;
   place-items: center;
   isolation: isolate;
-  background-image: url("/banner/banner1.webp");
+  background-image: url("/assets/imgs-site/sobre/cta-sobre.webp");
   background-size: cover;
   background-position: center;
 }
@@ -583,6 +635,12 @@
     grid-template-columns: 1fr;
     gap: 26px;
   }
+  .originalVideoSection {
+    width: min(100% - 40px, 720px);
+    padding-bottom: 90px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
   .experienceSection {
     padding: 90px 20px;
   }
@@ -665,6 +723,19 @@
   .highlightsContent > p,
   .ctaContent p {
     font-size: 16px;
+  }
+  .originalVideoSection {
+    width: calc(100% - 36px);
+    padding-bottom: 72px;
+  }
+  .originalVideoText h2 {
+    font-size: 40px;
+  }
+  .originalVideoText p {
+    font-size: 16px;
+  }
+  .originalVideoFrame {
+    border-width: 6px;
   }
   .experienceSection {
     padding: 72px 18px;

@@ -112,6 +112,14 @@ footer.site-footer .bottomRowFooter > p {
   font-size: 14px;
   line-height: 1.5;
 }
+footer.site-footer .bottomRowFooter .footer-mapa-site-link {
+  color: inherit;
+  text-decoration: none;
+}
+footer.site-footer .bottomRowFooter .footer-mapa-site-link:hover, footer.site-footer .bottomRowFooter .footer-mapa-site-link:focus-visible {
+  color: inherit;
+  text-decoration: none;
+}
 footer.site-footer .footerSelos {
   display: flex;
   align-items: center;
@@ -228,7 +236,7 @@ footer.site-footer .validator-seals img {
 
 .whatsapp-animate-circulo-pulse {
   position: fixed;
-  right: 15px;
+  right: 8px;
   bottom: 96px;
   z-index: 9997;
   width: 90px;
@@ -240,7 +248,7 @@ footer.site-footer .validator-seals img {
 
 .whatsapp-btn-config {
   position: fixed;
-  right: 40px;
+  right: 30.5px;
   bottom: 120px;
   z-index: 9999;
   width: 45px;
@@ -251,7 +259,7 @@ footer.site-footer .validator-seals img {
 
 .whatsapp-btn-bg {
   position: fixed;
-  right: 31px;
+  right: 23px;
   bottom: 111px;
   z-index: 9998;
   width: 60px;
