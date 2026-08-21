@@ -1,0 +1,25 @@
+Toca das Corujas - página de Eventos - 21/08/2026
+
+Alterações realizadas:
+- Criada nova rota /eventos.
+- Adicionado item EVENTOS ao menu desktop e mobile.
+- Adicionado Eventos ao menu do rodapé desktop.
+- Criado destaque para o Workshop Constelação Familiar com Cavalos de 12/09/2026.
+- Adicionadas as 3 artes enviadas em public/assets/imgs-site/eventos/.
+- Adicionados botões para Instagram e Facebook oficiais enviados pelo Felipe.
+- Adicionado botão de WhatsApp para consulta das últimas vagas do workshop.
+- Página criada com layout responsivo para desktop, tablet e celular.
+- Rota /eventos adicionada ao sitemap dinâmico.
+- Mapa de contato atualizado para as coordenadas enviadas (-23.50156429674056, -48.41902082553111).
+- Endereço exibido no contato atualizado para Rua Espírito Santo, Angatuba - SP.
+
+Redes sociais:
+Instagram: https://www.instagram.com/hoteltocadascorujas/
+Facebook: https://www.facebook.com/hoteltocadascorujas
+
+Validações executadas:
+- TypeScript (npx tsc --noEmit): OK.
+- ESLint nos arquivos alterados: OK.
+
+Observação:
+O pacote recebido não continha a pasta public original. Este ajuste cria apenas a pasta public/assets/imgs-site/eventos com as novas artes. Ao aplicar no projeto oficial, mantenha todas as mídias que já existem no public atual e copie/mescle estes arquivos sobre ele.

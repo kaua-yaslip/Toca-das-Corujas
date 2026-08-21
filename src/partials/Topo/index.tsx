@@ -149,6 +149,7 @@ export default function Topo() {
                 </ul> */}
               </li>
 
+              <li><Link href="/eventos" className={`nav-link ${rotaAtiva("/eventos") ? "ativo" : ""}`}>EVENTOS</Link></li>
               <li><Link href="/contato" className={`nav-link ${rotaAtiva("/contato") ? "ativo" : ""}`}>CONTATO</Link></li>
               <li><Link href="/informacoes" className={`nav-link link-mais ${rotaAtiva("/informacoes") ? "ativo" : ""}`} aria-label="Mais informações">+</Link></li>
             </ul>
@@ -213,6 +214,7 @@ export default function Topo() {
               <Link href="/suites" className={`nav-link ${rotaAtiva("/suites") ? "ativo" : ""}`} onClick={fecharMenu}>SUÍTES</Link>
             </li>
 
+            <li><Link href="/eventos" className={`nav-link ${rotaAtiva("/eventos") ? "ativo" : ""}`} onClick={fecharMenu}>EVENTOS</Link></li>
             <li><Link href="/contato" className={`nav-link ${rotaAtiva("/contato") ? "ativo" : ""}`} onClick={fecharMenu}>CONTATO</Link></li>
             <li><Link href="/informacoes" className={`nav-link ${rotaAtiva("/informacoes") ? "ativo" : ""}`} onClick={fecharMenu}>MAIS INFORMAÇÕES</Link></li>
           </ul>

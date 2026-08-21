@@ -31,17 +31,16 @@ export const settings: SiteSettings = {
   endereco: {
     // Localização oficial enviada para a Toca das Corujas.
     urlMaps:
-      "https://www.google.com/maps?cid=15877795217209804611&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF&hl=pt-BR&gl=BR&source=embed",
-    rua: "Hotel Fazenda Toca das Corujas",
-    numero: "1",
-    bairro: "Bairro dos Coqueiros",
+      "https://www.google.com/maps?q=-23.50156429674056,-48.41902082553111",
+    rua: "Rua Espírito Santo",
+    numero: "",
+    bairro: "",
     cidade: "Angatuba",
     estado: "SP",
     cep: "18240000",
-    // URL própria para iframe. O parâmetro output=embed evita o bloqueio
-    // que ocorre ao tentar carregar a página normal do Google Maps em um iframe.
+    // Mapa enviado para a nova localização em Angatuba.
     mapaEmbed:
-      "https://maps.google.com/maps?cid=15877795217209804611&z=15&output=embed",
+      "https://maps.google.com/maps?q=-23.50156429674056,-48.41902082553111&z=16&output=embed",
   },
   openGraph: {
     url,

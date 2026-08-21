@@ -145,7 +145,7 @@ export default function Page() {
               title={`Localização da ${siteName} no Google Maps`}
               loading="lazy"
               allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
 
             <Link
