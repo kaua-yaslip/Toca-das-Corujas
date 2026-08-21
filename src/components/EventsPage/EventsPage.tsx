@@ -56,6 +56,14 @@ export default function EventsPage() {
             >
               <FaInstagram aria-hidden="true" /> Instagram
             </Link>
+            <Link
+              href={facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.secondaryButton}
+            >
+              <FaFacebookF aria-hidden="true" /> Facebook
+            </Link>
           </div>
         </div>
 
