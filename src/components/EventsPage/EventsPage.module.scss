@@ -909,3 +909,265 @@
     opacity: 1;
   }
 }
+.galleryTrigger {
+  position: relative;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  overflow: hidden;
+
+  img {
+    transition: transform 0.5s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.galleryOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(20, 10, 8, 0.88),
+    rgba(20, 10, 8, 0.1)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  svg {
+    font-size: 28px;
+  }
+
+  span {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 700;
+
+    small {
+      margin-top: 3px;
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.85;
+    }
+  }
+}
+
+.galleryTrigger:hover .galleryOverlay {
+  opacity: 1;
+}
+
+.materialCaption {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  z-index: 3;
+  background: #4b2d2b;
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+
+/* ============================= */
+/* GALERIA EM TELA CHEIA */
+/* ============================= */
+
+.galleryModal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(8, 6, 5, 0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 90px;
+  backdrop-filter: blur(8px);
+}
+
+.galleryModalContent {
+  width: min(1100px, 100%);
+  height: min(90vh, 850px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.galleryMainImage {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+
+  img {
+    object-fit: contain;
+  }
+}
+
+.galleryCounter {
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+.closeGallery {
+  position: absolute;
+  right: 28px;
+  top: 25px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 22px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: rotate(90deg);
+  }
+}
+
+.galleryNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.38);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 22px;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+}
+
+.galleryPrev {
+  left: 26px;
+}
+
+.galleryNext {
+  right: 26px;
+}
+
+.galleryThumbnails {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 5px 0 10px;
+
+  scrollbar-width: thin;
+
+  button {
+    position: relative;
+    flex: 0 0 75px;
+    width: 75px;
+    height: 58px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    overflow: hidden;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0.55;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease;
+
+    img {
+      object-fit: cover;
+    }
+
+    &:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.galleryThumbnails .thumbnailActive {
+  opacity: 1;
+  border-color: #fff;
+}
+
+
+/* ============================= */
+/* RESPONSIVO */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .galleryModal {
+    padding: 70px 15px 20px;
+  }
+
+  .galleryModalContent {
+    height: 85vh;
+  }
+
+  .galleryNav {
+    width: 42px;
+    height: 42px;
+    top: 45%;
+    font-size: 17px;
+  }
+
+  .galleryPrev {
+    left: 8px;
+  }
+
+  .galleryNext {
+    right: 8px;
+  }
+
+  .closeGallery {
+    width: 42px;
+    height: 42px;
+    top: 15px;
+    right: 15px;
+  }
+
+  .galleryThumbnails button {
+    flex-basis: 65px;
+    width: 65px;
+    height: 50px;
+  }
+
+  .galleryOverlay {
+    opacity: 1;
+  }
+}
